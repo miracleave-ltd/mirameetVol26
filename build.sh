@@ -1,0 +1,1 @@
+docker-compose run doc honkit build

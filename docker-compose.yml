@@ -1,0 +1,11 @@
+version: '3.8'
+
+services: 
+  doc:
+    # image: tukiyo3/honkit
+    build: ./docker
+    restart: always
+    volumes:
+      - ./honkit:/srv/honkit
+    ports:
+      - "4001:4000"
