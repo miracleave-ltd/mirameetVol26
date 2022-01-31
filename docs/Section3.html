@@ -1,0 +1,415 @@
+
+<!DOCTYPE HTML>
+<html lang="ja" >
+    <head>
+        <meta charset="UTF-8">
+        <title>2. 検索プログラムの作成 · mirameet</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="HonKit 3.7.1">
+        
+        
+        
+    
+    <link rel="stylesheet" href="gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-search-pro-fixed/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-anchors/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-navigator/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-collapsible-chapters/collapsible-chapters.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-hints/plugin-hints.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-insert-logo/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="Section4.html" />
+    
+    
+    <link rel="prev" href="Section2.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book honkit-cloak">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="検索ワードを入力" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    はじめに
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="Section1.html">
+            
+                <a href="Section1.html">
+            
+                    
+                    0. 事前準備内容の確認
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="Section2.html">
+            
+                <a href="Section2.html">
+            
+                    
+                    1. テストデータの登録
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.4" data-path="Section3.html">
+            
+                <a href="Section3.html">
+            
+                    
+                    2. 検索プログラムの作成
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="Section4.html">
+            
+                <a href="Section4.html">
+            
+                    
+                    3. GoogleMapへ反映
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="Section5.html">
+            
+                <a href="Section5.html">
+            
+                    
+                    4. おまけ
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://github.com/honkit/honkit" target="blank" class="gitbook-link">
+            HonKitで公開 
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="." >2. 検索プログラムの作成</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="検索プログラムの作成"><a name="検索プログラムの作成" class="plugin-anchor" href="#検索プログラムの作成"><i class="fa fa-link" aria-hidden="true"></i></a>検索プログラムの作成</h1>
+<p>この手順では、BigQueryを検索するプログラムをJavaScriptで作成します。<br>また、作成したプログラムはNode.Jsで実行するため、サーバーレスで実行可能なCloud Funcitonにデプロイしていきます。<br><img src="img/draw_flow_0.png" alt>  </p>
+<h2 id="Cloud_Functionの設定">1. Cloud Functionの設定</h2>
+<p>Cloud Functionを設定します。<br>【ToDo】詳細な設定手順を記載する
+<img src="img/draw_flow_0.png" alt>  </p>
+<h2 id="BigQueryAPIのコード">2. BigQueryAPIのコード</h2>
+<p>BigQueryAPIにアクセスするコードを記述していきます。
+requireでBigQueryAPIを読み込みます。</p>
+<pre><code>const { BigQuery } = require(&apos;@google-cloud/bigquery&apos;);
+</code></pre><p>BigQueryのオブジェクトを生成し、BigQueryのプロジェクトIDを記述します。<br>プロジェクトIDはアカウントによって異なります。  </p>
+<pre><code>const bigquery = new BigQuery({
+    projectId: &apos;【プロジェクトID】&apos;
+});
+</code></pre><p>BigQueryを検索するSQLを記述します。<br>今回はAddressをLIKE検索で絞り込みたいと思います。  </p>
+<pre><code>const query = &quot;SELECT &quot;+
+              &quot; features.properties.Location.GeoCoordinates.Latitude AS Latitude &quot;+
+              &quot; , features.properties.Location.GeoCoordinates.Longitude AS Longitude &quot;+
+              &quot; , features.properties.Location.BusinessName AS BusinessName &quot;+
+              &quot;FROM TEST.TEST1 &quot;+
+              &quot;WHERE features.properties.Location.Address LIKE &apos;%【検索キーワード】%&apos;&quot;;
+</code></pre><p>BigQueryに登録されているデータは、ネストされた形式になっています。<br>通常のSQLだとエラーとなるため、LegacySQLで取得する必要があるため、useLegacySqlを&quot;true&quot;に設定します。</p>
+<pre><code>//with options
+const options = {
+    query: query,
+    useLegacySql: true,
+}
+</code></pre><p>次にメイン処理を追加します。
+BigQueryAPIにリクエストを投げて、レスポンス情報を取得する簡単なロジックになります。  </p>
+<pre><code>exports.main = (req, res) =&gt; {
+    bigquery.createQueryJob(options)
+        .then(results =&gt; {
+            const [job] = results;
+            return job.getQueryResults();
+        })
+        .then(results =&gt; {
+            const [rows] = results;
+            res.header(&apos;Access-Control-Allow-Origin&apos;, &quot;*&quot;);
+            res.header(&apos;Access-Control-Allow-Headers&apos;, &quot;Origin, X-Requested-With, Content-Type, Accept&quot;);
+            res.status(200).send(rows);
+        })
+        .catch(error =&gt; {
+            console.log(error);
+        })
+}
+</code></pre><p>最後に、BigQueryにアクセスするため、BigQueryAPIの依存関係を追加します。  </p>
+<pre><code>  &quot;dependencies&quot;: {
+    &quot;@google-cloud/bigquery&quot;: &quot;^5.10.0&quot;
+  }
+</code></pre><p>Cloud Functionをデプロイします。
+【ToDo】詳細な設定手順を記載する
+<img src="img/draw_flow_0.png" alt>  </p>
+<p>動作確認をします。
+<img src="img/draw_flow_0.png" alt>  </p>
+<p>以上で、バックエンドの処理は完了です。</p>
+<div id="anchors-navbar"><i class="fa fa-anchor"></i><ul><p><a href="#検索プログラムの作成">検索プログラムの作成</a></p><li><a href="#Cloud_Functionの設定">1. Cloud Functionの設定</a></li><li><a href="#BigQueryAPIのコード">2. BigQueryAPIのコード</a></li></ul></div><a href="#Cloud_Functionの設定" id="goTop"><i class="fa fa-arrow-up"></i></a>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="Section2.html" class="navigation navigation-prev " aria-label="Previous page: 1. テストデータの登録">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="Section4.html" class="navigation navigation-next " aria-label="Next page: 3. GoogleMapへ反映">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"2. 検索プログラムの作成","level":"1.4","depth":1,"next":{"title":"3. GoogleMapへ反映","level":"1.5","depth":1,"path":"Section4.md","ref":"Section4.md","articles":[]},"previous":{"title":"1. テストデータの登録","level":"1.3","depth":1,"path":"Section2.md","ref":"Section2.md","articles":[]},"dir":"ltr"},"config":{"plugins":["search-pro-fixed","-lunr","-search","hide-published-with","anchors","navigator","collapsible-chapters","hints","copy-code-button","custom-favicon","insert-logo"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"collapsible-chapters":{},"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"search-pro-fixed":{},"hide-published-with":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"favicon":"./img/miracleave.ico","navigator":{},"custom-favicon":{},"copy-code-button":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{},"insert-logo":{"url":"./img/miracleave.png","style":"background: none; width: 100%;"}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"mirameet","language":"ja","gitbook":"*"},"file":{"path":"Section3.md","mtime":"2022-01-26T23:51:17.200Z","type":"markdown"},"gitbook":{"version":"3.7.1","time":"2022-01-31T00:37:50.252Z"},"basePath":".","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <noscript>
+        <style>
+            .honkit-cloak {
+                display: block !important;
+            }
+        </style>
+    </noscript>
+    <script>
+        // Restore sidebar state as critical path for prevent layout shift
+        function __init__getSidebarState(defaultValue){
+            var baseKey = "";
+            var key = baseKey + ":sidebar";
+            try {
+                var value = localStorage[key];
+                if (value === undefined) {
+                    return defaultValue;
+                }
+                var parsed = JSON.parse(value);
+                return parsed == null ? defaultValue : parsed;
+            } catch (e) {
+                return defaultValue;
+            }
+        }
+        function __init__restoreLastSidebarState() {
+            var isMobile = window.matchMedia("(max-width: 600px)").matches;
+            if (isMobile) {
+                // Init last state if not mobile
+                return;
+            }
+            var sidebarState = __init__getSidebarState(true);
+            var book = document.querySelector(".book");
+            // Show sidebar if it enabled
+            if (sidebarState && book) {
+                book.classList.add("without-animation", "with-summary");
+            }
+        }
+
+        try {
+            __init__restoreLastSidebarState();
+        } finally {
+            var book = document.querySelector(".book");
+            book.classList.remove("honkit-cloak");
+        }
+    </script>
+    <script src="gitbook/gitbook.js"></script>
+    <script src="gitbook/theme.js"></script>
+    
+        
+        <script src="gitbook/gitbook-plugin-search-pro-fixed/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search-pro-fixed/search.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-hide-published-with/plugin.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-collapsible-chapters/collapsible-chapters.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-insert-logo/plugin.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
