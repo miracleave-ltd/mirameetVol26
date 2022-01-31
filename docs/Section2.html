@@ -3,10 +3,10 @@
 <html lang="ja" >
     <head>
         <meta charset="UTF-8">
-        <title>1. GCP各種サービスの設定 · mirameet</title>
+        <title>1. テストデータの登録 · mirameet</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
-        <meta name="generator" content="HonKit 3.6.21">
+        <meta name="generator" content="HonKit 3.7.1">
         
         
         
@@ -139,7 +139,7 @@
                 <a href="Section2.html">
             
                     
-                    1. GCP各種サービスの設定
+                    1. テストデータの登録
             
                 </a>
             
@@ -152,7 +152,7 @@
                 <a href="Section3.html">
             
                     
-                    2. ダウンロードしたファイルの解凍と設定
+                    2. 検索プログラムの作成
             
                 </a>
             
@@ -165,7 +165,7 @@
                 <a href="Section4.html">
             
                     
-                    3. 各処理の実行と処理結果の確認
+                    3. GoogleMapへ反映
             
                 </a>
             
@@ -216,7 +216,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="." >1. GCP各種サービスの設定</a>
+        <a href="." >1. テストデータの登録</a>
     </h1>
 </div>
 
@@ -231,58 +231,27 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="GCP各種サービスの設定"><a name="gcp各種サービスの設定" class="plugin-anchor" href="#gcp各種サービスの設定"><i class="fa fa-link" aria-hidden="true"></i></a>GCP各種サービスの設定</h1>
-<p>この手順では、GCPサービスの設定を進めていきます。<br><img src="img/draw_flow_1.png" alt>  </p>
-<h2 id="GCSバケット作成">1. GCSバケット作成</h2>
-<p>左上のナビゲーションメニューから、CloudStorageを選択<br><img src="img/GCS01.png" alt>
-「バケットを作成」をクリック
-<img src="img/GCS02.png" alt>
-グローバルに一意になるように各自設定を行います。<br><img src="img/GCS03.png" alt>
-↓作成完了<br><img src="img/GCS04.png" alt></p>
-<h2 id="サービスアカウントの作成">2. サービスアカウントの作成</h2>
-<p>GCPの各種リソースに対して権限を作成、管理することができるようにサービスアカウントを作成します  </p>
-<p>左上のナビゲーションメニューから、IAMと管理＞サービスアカウントを選択<br><img src="img/IAM01.png" alt>
-任意のサービスアカウント名を入力<br><img src="img/IAM02.png" alt>
-<img src="img/IAM03.png" alt>
-↓作成完了<br><img src="img/IAM04.png" alt></p>
-<h2 id="秘密鍵ファイルの作成・ダウンロード">3. 秘密鍵ファイルの作成・ダウンロード</h2>
-<p>作成したサービスアカウントを選択<br><img src="img/IAM04.png" alt>
-「キー」タブ＞「新しい鍵を作成」を選択<br><img src="img/IAM05.png" alt>
-json形式のキーをダウンロード<br><img src="img/IAM06.png" alt>
-↓ダウンロード完了<br><img src="img/IAM07.png" alt></p>
-<h2 id="CloudStorageAPIが有効化されていることを確認">4. CloudStorageAPIが有効化されていることを確認</h2>
-<p>画面上部の検索窓に「Cloud Storage」と入力し、検索結果から「Cloud Storage API」を選択<br><img src="img/GCS-API01.png" alt>
-※「APIが有効です」となっていることを確認<br><img src="img/GCS-API02.png" alt></p>
-<h2 id="BigQueryAPIが有効化されていることを確認">5. BigQueryAPIが有効化されていることを確認</h2>
-<p>画面上部の検索窓に「BigQuery API」と入力し、検索結果から「BigQuery API」を選択<br><img src="img/BQ-API01.png" alt>
-※「APIが有効です」となっていることを確認<br><img src="img/BQ-API02.png" alt></p>
-<h2 id="データセットの作成">6. データセットの作成</h2>
-<p>左上のナビゲーションメニューから、BigQueryを選択<br><img src="img/BQ01.png" alt>
-エクスプローラーの中の「▶プロジェクト名」から「データセットを作成」を選択<br><img src="img/BQ02.png" alt>
-画面右側に「データセットを作成する」が出てくるので、「データセットID」を入力<br>※今回は「mira_vol24」を指定  </p>
-<pre><code>mira_vol24
-</code></pre><p><img src="img/BQ03.png" alt>
-↓完了<br>「▶プロジェクト名」の下に「▶mira_vol24」が作成される<br><img src="img/BQ04.png" alt></p>
-<h2 id="テーブルの作成">7. テーブルの作成</h2>
-<p>作成したデータセット「mira_vol24」に対して、クエリを実行し、テーブルを作成<br>※今回は「mira_example」を指定</p>
-<pre><code>mira_example
-</code></pre><p><img src="img/BQ04.png" alt></p>
-<pre><code>CREATE TABLE mira_vol24.mira_example
-(
-    id NUMERIC,
-    mira_code STRING,
-    mira_text STRING,
-    work_date STRING
-)
-</code></pre><p>※データセットIDを「mira_vol24」から変更した場合は、<br>　ご自身が指定したデータセットIDに置換して実行する必要があります  </p>
-<p>↓実行完了<br><img src="img/BQ05.png" alt>
-先ほど実行したクエリ通りのフィールドが表示されていることを確認<br><img src="img/BQ06.png" alt></p>
-<p>このクエリは、  </p>
-<pre><code>データセットID＝mira_vol24
-テーブルID＝mira_example
-</code></pre><p>を指定しています  </p>
-<p>※先ほどDLしたソースファイルの\sql\mira_vol24.sql  の中にも同じSQLがあります </p>
-<div id="anchors-navbar"><i class="fa fa-anchor"></i><ul><p><a href="#GCP各種サービスの設定">GCP各種サービスの設定</a></p><li><a href="#GCSバケット作成">1. GCSバケット作成</a></li><li><a href="#サービスアカウントの作成">2. サービスアカウントの作成</a></li><li><a href="#秘密鍵ファイルの作成・ダウンロード">3. 秘密鍵ファイルの作成・ダウンロード</a></li><li><a href="#CloudStorageAPIが有効化されていることを確認">4. CloudStorageAPIが有効化されていることを確認</a></li><li><a href="#BigQueryAPIが有効化されていることを確認">5. BigQueryAPIが有効化されていることを確認</a></li><li><a href="#データセットの作成">6. データセットの作成</a></li><li><a href="#テーブルの作成">7. テーブルの作成</a></li></ul></div><a href="#GCSバケット作成" id="goTop"><i class="fa fa-arrow-up"></i></a>
+                                <h1 id="テストデータの登録"><a name="テストデータの登録" class="plugin-anchor" href="#テストデータの登録"><i class="fa fa-link" aria-hidden="true"></i></a>テストデータの登録</h1>
+<p>GoogleMapのデータをBigQueryで絞り込みを行っていくにあたり、<br>まずは絞り込むためのテストデータをBigQueryに登録します。<br>テストデータは、緯度経度が記述されているJSON形式とします。<br>今回は、GoogleMapで『スター』を付けた住所をExportし、テストデータとして使用したいと思います。<br><img src="img/draw_flow_0.png" alt>  </p>
+<h2 id="テストデータの作成">1. テストデータの作成</h2>
+<p>GoogleMapを開きます。
+<a href="https://www.google.co.jp/maps" target="_blank">https://www.google.co.jp/maps</a><br><img src="img/draw_flow_0.png" alt>  </p>
+<p>お気に入りの場所を選択し、『スター付き』を選択します。<br><img src="img/draw_flow_0.png" alt><br>複数スターを付けていきます。<br><img src="img/draw_flow_0.png" alt>  </p>
+<h2 id="テストデータのエクスポート">2. テストデータのエクスポート</h2>
+<p>Googleデータエクスポートを開きます。<br><a href="https://takeout.google.com/settings/takeout" target="_blank">https://takeout.google.com/settings/takeout</a><br>「選択をすべて解除」選択し、「マップ（マイプレイス）」のみ選択します。<br><img src="img/draw_flow_0.png" alt><br>「次のステップ」　＞　「エクスポート作成」をクリックします。<br><img src="img/draw_flow_0.png" alt><br>「ダウンロード」をクリックします。<br>ダウンロードしたZIPファイルを解凍し、JSON形式でスターを付けた情報が存在することを確認します。<br><img src="img/draw_flow_0.png" alt>  </p>
+<h2 id="テストデータのBigQueryへ登録する">3. テストデータのBigQueryへ登録する</h2>
+<p>BigQueryを開きます。<br><a href="https://console.cloud.google.com/bigquery" target="_blank">https://console.cloud.google.com/bigquery</a><br>Cloud Shellを開きます。<br><img src="img/draw_flow_0.png" alt><br>テストデータの形式に合うテーブル定義を作成します。</p>
+<pre><code>echo &apos;[{&quot;name&quot;: &quot;type&quot;,&quot;type&quot;: &quot;STRING&quot;,&quot;mode&quot;: &quot;NULLABLE&quot;},{&quot;name&quot;: &quot;features&quot;,&quot;type&quot;: &quot;RECORD&quot;,&quot;mode&quot;: &quot;REPEATED&quot;,&quot;fields&quot;: [{&quot;name&quot;: &quot;geometry&quot;,&quot;type&quot;: &quot;RECORD&quot;,&quot;mode&quot;: &quot;REPEATED&quot;,&quot;fields&quot;: [{&quot;name&quot;: &quot;coordinates&quot;,&quot;type&quot;: &quot;NUMERIC&quot;,&quot;mode&quot;: &quot;REPEATED&quot;,&quot;fields&quot;: []},{&quot;name&quot;: &quot;type&quot;,&quot;type&quot;: &quot;STRING&quot;,&quot;mode&quot;: &quot;NULLABLE&quot;}]},{&quot;name&quot;: &quot;properties&quot;,&quot;type&quot;: &quot;RECORD&quot;,&quot;mode&quot;: &quot;REPEATED&quot;,&quot;fields&quot;: [{&quot;name&quot;: &quot;GoogleMapsURL&quot;,&quot;type&quot;: &quot;STRING&quot;,&quot;mode&quot;: &quot;NULLABLE&quot;},{&quot;name&quot;: &quot;Location&quot;,&quot;type&quot;: &quot;RECORD&quot;,&quot;mode&quot;: &quot;REPEATED&quot;,&quot;fields&quot;: [{&quot;name&quot;: &quot;Address&quot;,&quot;type&quot;: &quot;STRING&quot;,&quot;mode&quot;: &quot;NULLABLE&quot;},{&quot;name&quot;: &quot;BusinessName&quot;,&quot;type&quot;: &quot;STRING&quot;,&quot;mode&quot;: &quot;NULLABLE&quot;},{&quot;name&quot;: &quot;GeoCoordinates&quot;,&quot;type&quot;: &quot;RECORD&quot;,&quot;mode&quot;: &quot;REPEATED&quot;,&quot;fields&quot;: [{&quot;name&quot;: &quot;Latitude&quot;,&quot;type&quot;: &quot;STRING&quot;,&quot;mode&quot;: &quot;NULLABLE&quot;},{&quot;name&quot;: &quot;Longitude&quot;,&quot;type&quot;: &quot;STRING&quot;,&quot;mode&quot;: &quot;NULLABLE&quot;}]}]},{&quot;name&quot;: &quot;Published&quot;,&quot;type&quot;: &quot;STRING&quot;,&quot;mode&quot;: &quot;NULLABLE&quot;},{&quot;name&quot;: &quot;Title&quot;,&quot;type&quot;: &quot;STRING&quot;,&quot;mode&quot;: &quot;NULLABLE&quot;},{&quot;name&quot;: &quot;Updated&quot;,&quot;type&quot;: &quot;STRING&quot;,&quot;mode&quot;: &quot;NULLABLE&quot;}]},{&quot;name&quot;: &quot;type&quot;,&quot;type&quot;: &quot;STRING&quot;,&quot;mode&quot;: &quot;NULLABLE&quot;}]}]&apos; &gt; ddl.json
+</code></pre><p>データセットを作成します。  </p>
+<pre><code>bq mk --dataset --location=asia-northeast1 TEST2
+bq mk --table TEST2.TEST2 ddl.json
+</code></pre><p>テストデータをアップロードします。<br><img src="img/draw_flow_0.png" alt><br>BigQueryにJSON形式を取り込み場合、JSON内の改行は除外する必要があるため、以下コマンドで置換します。  </p>
+<pre><code>sed -z &apos;s/\n//g&apos; 保存した場所.json | sed -z &apos;s/Google Maps URL/GoogleMapsURL/g&apos; | sed -z &apos;s/Business Name/BusinessName/g&apos; | sed -z &apos;s/Geo Coordinates/GeoCoordinates/g&apos; &gt; test_data.json
+</code></pre><p>テストデータを登録します。  </p>
+<pre><code>bq load --source_format=NEWLINE_DELIMITED_JSON TEST2.TEST4 test_data.json
+</code></pre><p>SQLエディターから、テストデータが登録されているかを確認します。  </p>
+<pre><code>SELECT * FROM TEST2.TEST2
+</code></pre><div id="anchors-navbar"><i class="fa fa-anchor"></i><ul><p><a href="#テストデータの登録">テストデータの登録</a></p><li><a href="#テストデータの作成">1. テストデータの作成</a></li><li><a href="#テストデータのエクスポート">2. テストデータのエクスポート</a></li><li><a href="#テストデータのBigQueryへ登録する">3. テストデータのBigQueryへ登録する</a></li></ul></div><a href="#テストデータの作成" id="goTop"><i class="fa fa-arrow-up"></i></a>
                                 
                                 </section>
                             
@@ -314,7 +283,7 @@ json形式のキーをダウンロード<br><img src="img/IAM06.png" alt>
                 </a>
                 
                 
-                <a href="Section3.html" class="navigation navigation-next " aria-label="Next page: 2. ダウンロードしたファイルの解凍と設定">
+                <a href="Section3.html" class="navigation navigation-next " aria-label="Next page: 2. 検索プログラムの作成">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -325,7 +294,7 @@ json形式のキーをダウンロード<br><img src="img/IAM06.png" alt>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"1. GCP各種サービスの設定","level":"1.3","depth":1,"next":{"title":"2. ダウンロードしたファイルの解凍と設定","level":"1.4","depth":1,"path":"Section3.md","ref":"Section3.md","articles":[]},"previous":{"title":"0. 事前準備内容の確認","level":"1.2","depth":1,"path":"Section1.md","ref":"Section1.md","articles":[]},"dir":"ltr"},"config":{"plugins":["search-pro-fixed","-lunr","-search","hide-published-with","anchors","navigator","collapsible-chapters","hints","copy-code-button","custom-favicon","insert-logo"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"collapsible-chapters":{},"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"search-pro-fixed":{},"hide-published-with":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"favicon":"./img/miracleave.ico","navigator":{},"custom-favicon":{},"copy-code-button":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{},"insert-logo":{"url":"./img/miracleave.png","style":"background: none; width: 100%;"}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"mirameet","language":"ja","gitbook":"*"},"file":{"path":"Section2.md","mtime":"2021-10-01T14:00:41.121Z","type":"markdown"},"gitbook":{"version":"3.6.21","time":"2021-10-01T14:06:03.902Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"1. テストデータの登録","level":"1.3","depth":1,"next":{"title":"2. 検索プログラムの作成","level":"1.4","depth":1,"path":"Section3.md","ref":"Section3.md","articles":[]},"previous":{"title":"0. 事前準備内容の確認","level":"1.2","depth":1,"path":"Section1.md","ref":"Section1.md","articles":[]},"dir":"ltr"},"config":{"plugins":["search-pro-fixed","-lunr","-search","hide-published-with","anchors","navigator","collapsible-chapters","hints","copy-code-button","custom-favicon","insert-logo"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"collapsible-chapters":{},"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"search-pro-fixed":{},"hide-published-with":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"favicon":"./img/miracleave.ico","navigator":{},"custom-favicon":{},"copy-code-button":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{},"insert-logo":{"url":"./img/miracleave.png","style":"background: none; width: 100%;"}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"mirameet","language":"ja","gitbook":"*"},"file":{"path":"Section2.md","mtime":"2022-01-26T05:00:30.638Z","type":"markdown"},"gitbook":{"version":"3.7.1","time":"2022-01-31T00:37:50.252Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>

@@ -3,10 +3,10 @@
 <html lang="ja" >
     <head>
         <meta charset="UTF-8">
-        <title>3. 各処理の実行と処理結果の確認 · mirameet</title>
+        <title>3. GoogleMapへ反映 · mirameet</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
-        <meta name="generator" content="HonKit 3.6.21">
+        <meta name="generator" content="HonKit 3.7.1">
         
         
         
@@ -139,7 +139,7 @@
                 <a href="Section2.html">
             
                     
-                    1. GCP各種サービスの設定
+                    1. テストデータの登録
             
                 </a>
             
@@ -152,7 +152,7 @@
                 <a href="Section3.html">
             
                     
-                    2. ダウンロードしたファイルの解凍と設定
+                    2. 検索プログラムの作成
             
                 </a>
             
@@ -165,7 +165,7 @@
                 <a href="Section4.html">
             
                     
-                    3. 各処理の実行と処理結果の確認
+                    3. GoogleMapへ反映
             
                 </a>
             
@@ -216,7 +216,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="." >3. 各処理の実行と処理結果の確認</a>
+        <a href="." >3. GoogleMapへ反映</a>
     </h1>
 </div>
 
@@ -231,146 +231,54 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="各処理の実行と処理結果の確認"><a name="各処理の実行と処理結果の確認" class="plugin-anchor" href="#各処理の実行と処理結果の確認"><i class="fa fa-link" aria-hidden="true"></i></a>各処理の実行と処理結果の確認</h1>
-<p>この手順では、手順２で修正したOperationObject.pyを含む各ソースを動かし、BigQueryのデータを操作していきます。
-<img src="img/draw_flow_3.png" alt>  </p>
-<h2 id="カレントディレクトリの移動">1. カレントディレクトリの移動</h2>
-<p>Zipファイルを解凍したディレクトリまで移動  </p>
-<pre><code>cd ～～～mirameetVol24-main
-</code></pre><h2 id="Dockerでコンテナを起動">2. Dockerでコンテナを起動</h2>
-<pre><code>docker-compose up -d --build
-</code></pre><p><img src="img/docker-build.png" alt>  </p>
-<h2 id="起動したDockerコンテナに接続">3. 起動したDockerコンテナに接続</h2>
-<pre><code>docker-compose exec app bash
-</code></pre><p><img src="img/dockerbash.png" alt>  </p>
-<h2 id="GcsUploader01_pyの実行">4. GcsUploader01.pyの実行</h2>
-<p><img src="img/draw_flow_3-1.png" alt><br>CSVデータファイルをGCSバケット上にアップロードする  </p>
-<pre><code>python GcsUploader01.py
-</code></pre><p>▼中身</p>
-<pre><code>import os
-import OperationObject # 操作対象の設定情報取得
-from google.cloud import storage
-
-# GCP認証設定
-os.environ[&apos;GOOGLE_APPLICATION_CREDENTIALS&apos;] = OperationObject.GOOGLE_APPLICATION_CREDENTIALS
-
-# GCSクライアントAPIの利用宣言
-client = storage.Client()
-
-# GCSバケット取得
-bucket = client.get_bucket(OperationObject.bucket_name)
-
-# CSVファイルアップロード
-blob = bucket.blob(os.path.basename(OperationObject.source_file_name))
-blob.upload_from_filename(OperationObject.source_file_name)
-
-print(&apos;File {} uploaded to {}.&apos;.format(
-    OperationObject.source_file_name,
-    bucket))
-</code></pre><p>↓正常終了<br><img src="img/01py01.png" alt><br>mirameetVol24-main\src\csvの中の「gcs-example.csv」が、GCSにアップロードされていることを確認<br><img src="img/01py02.png" alt>  </p>
-<h2 id="GcsToBigQuery02_pyの実行">5. GcsToBigQuery02.pyの実行</h2>
-<p><img src="img/draw_flow_3-2.png" alt><br>GCSにアップロードしたCSVデータをBigQueryにインサートする  </p>
-<pre><code>python GcsToBigQuery02.py
-</code></pre><p>▼中身</p>
-<pre><code>import os
-import OperationObject # 操作対象の設定情報取得
-from google.cloud import bigquery
-
-# GCP認証設定
-os.environ[&apos;GOOGLE_APPLICATION_CREDENTIALS&apos;] = OperationObject.GOOGLE_APPLICATION_CREDENTIALS
-
-# BigQueryクライアントAPIを利用宣言
-client = bigquery.Client(OperationObject.project_id)
-
-# テーブル情報の取得
-table_info = client.dataset(OperationObject.dataset_id).table(OperationObject.table_id)
-
-# 登録対象のテーブル定義を設定
-job_config = bigquery.LoadJobConfig(
-    # テーブルカラムマッピング情報の設定
-    schema=[
-        bigquery.SchemaField(&quot;id&quot;, &quot;NUMERIC&quot;),
-        bigquery.SchemaField(&quot;mira_code&quot;, &quot;STRING&quot;),
-        bigquery.SchemaField(&quot;mira_text&quot;, &quot;STRING&quot;),
-        bigquery.SchemaField(&quot;work_date&quot;, &quot;STRING&quot;)
-    ],
-    # 読み込み開始行の指定（ヘッダ行がないため0を設定）
-    skip_leading_rows=0,
-    # ソースフォーマットの指定（CSV形式に設定）
-    source_format=bigquery.SourceFormat.CSV,
-)
-
-# GCSバケットをロードし、テーブルに登録
-load_job = client.load_table_from_uri(
-    OperationObject.url_gs_example_csv, table_info, job_config=job_config
-)
-
-load_job.result()  # load_table_from_uriが終了するまで待機
-
-regist_table_info = client.get_table(table_info)  # 登録後のテーブル情報取得
-print(&quot;Loaded {} rows.&quot;.format(regist_table_info.num_rows))
-</code></pre><p>↓正常終了<br><img src="img/02py01.png" alt><br>「gcs-example.csv」の中のデータがBigQueryにインサートされていることを確認<br>プレビュータグでデータの中身を確認<br><img src="img/02py03.png" alt>  </p>
-<h2 id="UpdateDeleteBigQuery03_pyの実行">6. UpdateDeleteBigQuery03.pyの実行</h2>
-<p><img src="img/draw_flow_3-3.png" alt><br>BigQueryのデータを更新・削除する  </p>
-<pre><code>python UpdateDeleteBigQuery03.py
-</code></pre><p>▼中身</p>
-<pre><code>import os
-import OperationObject # 操作対象の設定情報取得
-from google.cloud import bigquery
-
-# GCP認証設定
-os.environ[&apos;GOOGLE_APPLICATION_CREDENTIALS&apos;] = OperationObject.GOOGLE_APPLICATION_CREDENTIALS
-
-# BigQueryクライアントAPIの利用宣言
-client = bigquery.Client()
-
-# 更新SQL生成
-updateQuery = &quot;UPDATE `{0}.{1}.{2}` SET mira_text = &apos;更新&apos; WHERE id = 2&quot;.\
-    format(OperationObject.project_id, OperationObject.dataset_id, OperationObject.table_id)
-# SQL実行
-client.query(updateQuery).result()
-print(&quot;Updated ID=2.&quot;)
-
-# 削除SQL生成
-deleteQuery = &quot;DELETE `{0}.{1}.{2}` WHERE id = 3&quot;.\
-    format(OperationObject.project_id, OperationObject.dataset_id, OperationObject.table_id)
-# SQL実行
-client.query(deleteQuery).result()
-print(&quot;Deleted ID=3.&quot;)
-</code></pre><p>↓正常終了<br><img src="img/03py01.png" alt><br>ID＝2のデータが更新、ID＝3のデータが削除されていることを確認<br><img src="img/03py02.png" alt>  </p>
-<h2 id="ExportBigQuery04_pyの実行">7. ExportBigQuery04.pyの実行</h2>
-<p><img src="img/draw_flow_3-4.png" alt><br>BigQueryのデータをCSVデータファイルとしてGCSバケットにエクスポートする  </p>
-<pre><code>python ExportBigQuery04.py
-</code></pre><p>▼中身</p>
-<pre><code>import os
-import OperationObject # 操作対象の設定情報取得
-from google.cloud import bigquery
-
-# GCP認証設定
-os.environ[&apos;GOOGLE_APPLICATION_CREDENTIALS&apos;] = OperationObject.GOOGLE_APPLICATION_CREDENTIALS
-
-# BigQueryクライアントAPIの利用宣言
-client = bigquery.Client(OperationObject.project_id)
-# テーブル情報の取得
-table_info = client.dataset(OperationObject.dataset_id).table(OperationObject.table_id)
-
-# データ取得結果をGCSバケットにエキスポート 
-extract_job = client.extract_table(
-    table_info,
-    OperationObject.out_url_gs_example_csv,
-)
-
-extract_job.result() # extract_tableが終了するまで待機
-
-print(
-    &quot;Exported {}:{}.{} to {}&quot;.format(
-        OperationObject.project_id,
-        OperationObject.dataset_id,
-        OperationObject.table_id,
-        OperationObject.out_url_gs_example_csv)
-)
-</code></pre><p>↓正常終了<br><img src="img/04py01.png" alt><br>BigQueryのデータが「out-gcs-example.csv」ファイルとしてGCSに出力されていることを確認<br><img src="img/04py02.png" alt><br>ダウンロードボタンでファイルをローカルにダウンロード<br><img src="img/04py03.png" alt><br>ダウンロードしたCSVファイルの中身で更新後の状態を確認<br><img src="img/04py04.png" alt>  </p>
-<div id="anchors-navbar"><i class="fa fa-anchor"></i><ul><p><a href="#各処理の実行と処理結果の確認">各処理の実行と処理結果の確認</a></p><li><a href="#カレントディレクトリの移動">1. カレントディレクトリの移動</a></li><li><a href="#Dockerでコンテナを起動">2. Dockerでコンテナを起動</a></li><li><a href="#起動したDockerコンテナに接続">3. 起動したDockerコンテナに接続</a></li><li><a href="#GcsUploader01_pyの実行">4. GcsUploader01.pyの実行</a></li><li><a href="#GcsToBigQuery02_pyの実行">5. GcsToBigQuery02.pyの実行</a></li><li><a href="#UpdateDeleteBigQuery03_pyの実行">6. UpdateDeleteBigQuery03.pyの実行</a></li><li><a href="#ExportBigQuery04_pyの実行">7. ExportBigQuery04.pyの実行</a></li></ul></div><a href="#カレントディレクトリの移動" id="goTop"><i class="fa fa-arrow-up"></i></a>
+                                <h1 id="GoogleMapへ反映"><a name="googlemapへ反映" class="plugin-anchor" href="#googlemapへ反映"><i class="fa fa-link" aria-hidden="true"></i></a>GoogleMapへ反映</h1>
+<p>この手順では、GoogleMapJavaSciriptAPIを使い、BigQueryの情報を絞り込んでピン止めするプログラムを<br>Web上で開発出来るCloud Shell Editerを使って開発していきます。<br>また、開発したプログラムはCloud Shell Editerで実行し、動作確認をしていきます。<br><img src="img/draw_flow_0.png" alt>  </p>
+<h2 id="ソースコードの取得">1. ソースコードの取得</h2>
+<p>Googleが提供しているSimpleMapのソースコードをベースに作成していきます。
+Googleドキュメントを開きます。<br><a href="https://developers.google.com/maps/documentation/javascript/examples/map-simple" target="_blank">https://developers.google.com/maps/documentation/javascript/examples/map-simple</a>  </p>
+<p>少しページをスクロールしたところにサンプルのソースコードがあります。<br>Google Cloud Shellを選択し、コードを取得します。<br><img src="img/draw_flow_0.png" alt>  </p>
+<p>Cloud Shell Editerが開き、ソースコードが配置されています。<br>フロントエンドの動作確認は全てCloud Shell Editer上から可能です。<br><img src="img/draw_flow_0.png" alt>  </p>
+<p>まずは、サンプルコードを実行してみましょ。<br>左欄からDebugを選び、再生ボタンをクリックします。<br><img src="img/draw_flow_0.png" alt>  </p>
+<p>右上にあるプレビューボタンからWebページの動作を確認します。
+<img src="img/draw_flow_0.png" alt>  </p>
+<h2 id="BigQueryとの連携">2. BigQueryとの連携</h2>
+<p>手順②で作成したCloud FunctionではBigQueryにアクセスし、検索結果をレスポンスで返却しているので、<br>Cloud FuctionのURLをTypeScriptから実行し、レスポンス情報を取得して、GoogleMapAPIに反映します。  </p>
+<p>Cloud Functionにアクセスし、レスポンス情報から緯度経度と、建物名を取得します。  </p>
+<pre><code>   var center;
+   var data = new Array();
+   fetch(`https://us-central1-sinuous-branch-322702.cloudfunctions.net/function-2`)
+    .then(response =&gt; {
+        console.log(response.status);
+        response.json().then(userInfo =&gt; {
+            for (var i = 0; i &lt; userInfo.length; i++) {
+                console.log(userInfo[i].Latitude);
+                center = {lat: Number(userInfo[i].Latitude), 
+                          lng: Number(userInfo[i].Longitude)};
+                data.push({
+                        position: new google.maps.LatLng(
+                            Number(userInfo[i].Latitude), 
+                            Number(userInfo[i].Longitude)),
+                        content: userInfo[i].BusinessName});
+                console.log(data);
+</code></pre><p>緯度経度にピン立てをします。<br>複数の住所情報がBigQueryから渡されることを考慮し、ループ処理でピン立てをします。<br>ピン立ての変数を宣言します。  </p>
+<pre><code>let marker: google.maps.Marker;
+</code></pre><p>処理を追加します。  </p>
+<pre><code>                for (var i = 0; i &lt; data.length; i++) {
+                  marker = new google.maps.Marker({
+                      position: data[i].position,
+                      map: map
+                });
+</code></pre><p>建物名を吹き出しに追加します。<br>吹き出しの変数を宣言します。  </p>
+<pre><code>let infoWindow: google.maps.InfoWindow;
+</code></pre><p>処理を追加します。  </p>
+<pre><code>                infoWindow = new google.maps.InfoWindow({
+                      position: data[i].position,
+                      content: data[i].content,
+                  });
+                infoWindow.open(map);
+</code></pre><p>プレビューボタンより、動作を確認します。<br><img src="img/draw_flow_0.png" alt>  </p>
+<p>BigQueryに登録したスター情報を絞り込んで検索出来ています。<br>また、ピンや吹き出しも追加出来ています。<br><img src="img/draw_flow_0.png" alt>  </p>
+<div id="anchors-navbar"><i class="fa fa-anchor"></i><ul><p><a href="#GoogleMapへ反映">GoogleMapへ反映</a></p><li><a href="#ソースコードの取得">1. ソースコードの取得</a></li><li><a href="#BigQueryとの連携">2. BigQueryとの連携</a></li></ul></div><a href="#ソースコードの取得" id="goTop"><i class="fa fa-arrow-up"></i></a>
                                 
                                 </section>
                             
@@ -397,7 +305,7 @@ print(
 
             
                 
-                <a href="Section3.html" class="navigation navigation-prev " aria-label="Previous page: 2. ダウンロードしたファイルの解凍と設定">
+                <a href="Section3.html" class="navigation navigation-prev " aria-label="Previous page: 2. 検索プログラムの作成">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
@@ -413,7 +321,7 @@ print(
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"3. 各処理の実行と処理結果の確認","level":"1.5","depth":1,"next":{"title":"4. おまけ","level":"1.6","depth":1,"path":"Section5.md","ref":"Section5.md","articles":[]},"previous":{"title":"2. ダウンロードしたファイルの解凍と設定","level":"1.4","depth":1,"path":"Section3.md","ref":"Section3.md","articles":[]},"dir":"ltr"},"config":{"plugins":["search-pro-fixed","-lunr","-search","hide-published-with","anchors","navigator","collapsible-chapters","hints","copy-code-button","custom-favicon","insert-logo"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"collapsible-chapters":{},"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"search-pro-fixed":{},"hide-published-with":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"favicon":"./img/miracleave.ico","navigator":{},"custom-favicon":{},"copy-code-button":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{},"insert-logo":{"url":"./img/miracleave.png","style":"background: none; width: 100%;"}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"mirameet","language":"ja","gitbook":"*"},"file":{"path":"Section4.md","mtime":"2021-10-01T14:00:41.121Z","type":"markdown"},"gitbook":{"version":"3.6.21","time":"2021-10-01T14:06:03.902Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"3. GoogleMapへ反映","level":"1.5","depth":1,"next":{"title":"4. おまけ","level":"1.6","depth":1,"path":"Section5.md","ref":"Section5.md","articles":[]},"previous":{"title":"2. 検索プログラムの作成","level":"1.4","depth":1,"path":"Section3.md","ref":"Section3.md","articles":[]},"dir":"ltr"},"config":{"plugins":["search-pro-fixed","-lunr","-search","hide-published-with","anchors","navigator","collapsible-chapters","hints","copy-code-button","custom-favicon","insert-logo"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"collapsible-chapters":{},"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"search-pro-fixed":{},"hide-published-with":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"favicon":"./img/miracleave.ico","navigator":{},"custom-favicon":{},"copy-code-button":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{},"insert-logo":{"url":"./img/miracleave.png","style":"background: none; width: 100%;"}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"mirameet","language":"ja","gitbook":"*"},"file":{"path":"Section4.md","mtime":"2022-01-26T05:00:52.810Z","type":"markdown"},"gitbook":{"version":"3.7.1","time":"2022-01-31T00:37:50.252Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>

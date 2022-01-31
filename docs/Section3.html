@@ -3,10 +3,10 @@
 <html lang="ja" >
     <head>
         <meta charset="UTF-8">
-        <title>2. ダウンロードしたファイルの解凍と設定 · mirameet</title>
+        <title>2. 検索プログラムの作成 · mirameet</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
-        <meta name="generator" content="HonKit 3.6.21">
+        <meta name="generator" content="HonKit 3.7.1">
         
         
         
@@ -139,7 +139,7 @@
                 <a href="Section2.html">
             
                     
-                    1. GCP各種サービスの設定
+                    1. テストデータの登録
             
                 </a>
             
@@ -152,7 +152,7 @@
                 <a href="Section3.html">
             
                     
-                    2. ダウンロードしたファイルの解凍と設定
+                    2. 検索プログラムの作成
             
                 </a>
             
@@ -165,7 +165,7 @@
                 <a href="Section4.html">
             
                     
-                    3. 各処理の実行と処理結果の確認
+                    3. GoogleMapへ反映
             
                 </a>
             
@@ -216,7 +216,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="." >2. ダウンロードしたファイルの解凍と設定</a>
+        <a href="." >2. 検索プログラムの作成</a>
     </h1>
 </div>
 
@@ -231,62 +231,61 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="ダウンロードしたファイルの解凍と設定"><a name="ダウンロードしたファイルの解凍と設定" class="plugin-anchor" href="#ダウンロードしたファイルの解凍と設定"><i class="fa fa-link" aria-hidden="true"></i></a>ダウンロードしたファイルの解凍と設定</h1>
-<p>この手順では、GithubからダウンロードしたZipファイルを任意のディレクトリで解凍し、設定していきます。
-<img src="img/draw_flow_2.png" alt>  </p>
-<h2 id="OperationObject_pyの編集">1. OperationObject.pyの編集</h2>
-<pre><code># ------------------------------------------------------
-# 変数
-# ------------------------------------------------------
-GOOGLE_APPLICATION_CREDENTIALS=&apos;./credential/key.json&apos;
-
-# CSVコピー元
-source_file_name = &apos;./csv/gcs-example.csv&apos;
-
-# CSVアップロード先
-url_gs_example_csv=&quot;gs://mira-example/gcs-example.csv&quot; # 手順1.1
-# CSVエクスポート先
-out_url_gs_example_csv=&quot;gs://mira-example/out-gcs-example.csv&quot; # 手順1.1
-
-# GCSバケット名
-bucket_name = &quot;mira-example&quot; # 手順1.2
-
-# 操作テーブル
-project_id = &quot;erudite-pride-323410&quot; # 手順1.3
-dataset_id = &quot;mira_vol24&quot; # 手順1.4
-table_id = &quot;mira_example&quot; # 手順1.5
-</code></pre><h3 id="gsutil_URI">1.1. gsutil URI</h3>
-<p>Cloud Storageのバケットの情報から「gsutil URI」をコピーして置換<br><img src="img/GCSバケット詳細.png" alt>
-（例）  </p>
-<pre><code>url_gs_example_csv=&quot;gs://mira-example/gcs-example.csv&quot;
-out_url_gs_example_csv=&quot;gs://mira-example/out-gcs-example.csv&quot;
-↓
-url_gs_example_csv=&quot;gs://mirameet24_test00/gcs-example.csv&quot;
-out_url_gs_example_csv=&quot;gs://mirameet24_test00/out-gcs-example.csv&quot;
-</code></pre><h3 id="bucket_name">1.2. bucket_name</h3>
-<p>グローバルに一意になるように作成したバケット名をコピーして置換<br><img src="img/GCS04.png" alt>
-（例）  </p>
-<pre><code>bucket_name = &quot;mira-example&quot;
-↓
-bucket_name = &quot;mirameet24_test00&quot;
-</code></pre><h3 id="project_id">1.3. project_id</h3>
-<p>GCPダッシュボードの左上から「プロジェクトID」をコピーして置換<br><img src="img/dashboad.png" alt>
-（例）  </p>
-<pre><code>project_id = &quot;erudite-pride-323410&quot;
-↓
-project_id = &quot;neural-sol-325512&quot;
-</code></pre><h3 id="dataset_id">1.4. dataset_id</h3>
-<p>「データセットID」を変更した場合、任意で設定した値に置換<br><img src="img/BQ04.png" alt></p>
-<pre><code>dataset_id = &quot;mira_vol24&quot;
-</code></pre><h3 id="table_id">1.5. table_id</h3>
-<p>テーブル作成時のクエリから変更した場合、任意で設定した値に置換<br><img src="img/BQ06.png" alt></p>
-<pre><code>table_id = &quot;mira-example&quot;
-</code></pre><h2 id="ダウンロードしたjson形式の秘密鍵ファイルの配置">2. ダウンロードしたjson形式の秘密鍵ファイルの配置</h2>
-<p>・ファイル名を下記に変更  </p>
-<pre><code>key.json
-</code></pre><p>・解凍したZipファイルのcredentialに配置  </p>
-<pre><code>～～～mirameetVol24-main\src\credential
-</code></pre><div id="anchors-navbar"><i class="fa fa-anchor"></i><ul><p><a href="#ダウンロードしたファイルの解凍と設定">ダウンロードしたファイルの解凍と設定</a></p><li><a href="#OperationObject_pyの編集">1. OperationObject.pyの編集</a></li><ul><li><a href="#gsutil_URI">1.1. gsutil URI</a></li><li><a href="#bucket_name">1.2. bucket_name</a></li><li><a href="#project_id">1.3. project_id</a></li><li><a href="#dataset_id">1.4. dataset_id</a></li><li><a href="#table_id">1.5. table_id</a></li></ul><li><a href="#ダウンロードしたjson形式の秘密鍵ファイルの配置">2. ダウンロードしたjson形式の秘密鍵ファイルの配置</a></li></ul></div><a href="#OperationObject_pyの編集" id="goTop"><i class="fa fa-arrow-up"></i></a>
+                                <h1 id="検索プログラムの作成"><a name="検索プログラムの作成" class="plugin-anchor" href="#検索プログラムの作成"><i class="fa fa-link" aria-hidden="true"></i></a>検索プログラムの作成</h1>
+<p>この手順では、BigQueryを検索するプログラムをJavaScriptで作成します。<br>また、作成したプログラムはNode.Jsで実行するため、サーバーレスで実行可能なCloud Funcitonにデプロイしていきます。<br><img src="img/draw_flow_0.png" alt>  </p>
+<h2 id="Cloud_Functionの設定">1. Cloud Functionの設定</h2>
+<p>Cloud Functionを設定します。<br>【ToDo】詳細な設定手順を記載する
+<img src="img/draw_flow_0.png" alt>  </p>
+<h2 id="BigQueryAPIのコード">2. BigQueryAPIのコード</h2>
+<p>BigQueryAPIにアクセスするコードを記述していきます。
+requireでBigQueryAPIを読み込みます。</p>
+<pre><code>const { BigQuery } = require(&apos;@google-cloud/bigquery&apos;);
+</code></pre><p>BigQueryのオブジェクトを生成し、BigQueryのプロジェクトIDを記述します。<br>プロジェクトIDはアカウントによって異なります。  </p>
+<pre><code>const bigquery = new BigQuery({
+    projectId: &apos;【プロジェクトID】&apos;
+});
+</code></pre><p>BigQueryを検索するSQLを記述します。<br>今回はAddressをLIKE検索で絞り込みたいと思います。  </p>
+<pre><code>const query = &quot;SELECT &quot;+
+              &quot; features.properties.Location.GeoCoordinates.Latitude AS Latitude &quot;+
+              &quot; , features.properties.Location.GeoCoordinates.Longitude AS Longitude &quot;+
+              &quot; , features.properties.Location.BusinessName AS BusinessName &quot;+
+              &quot;FROM TEST.TEST1 &quot;+
+              &quot;WHERE features.properties.Location.Address LIKE &apos;%【検索キーワード】%&apos;&quot;;
+</code></pre><p>BigQueryに登録されているデータは、ネストされた形式になっています。<br>通常のSQLだとエラーとなるため、LegacySQLで取得する必要があるため、useLegacySqlを&quot;true&quot;に設定します。</p>
+<pre><code>//with options
+const options = {
+    query: query,
+    useLegacySql: true,
+}
+</code></pre><p>次にメイン処理を追加します。
+BigQueryAPIにリクエストを投げて、レスポンス情報を取得する簡単なロジックになります。  </p>
+<pre><code>exports.main = (req, res) =&gt; {
+    bigquery.createQueryJob(options)
+        .then(results =&gt; {
+            const [job] = results;
+            return job.getQueryResults();
+        })
+        .then(results =&gt; {
+            const [rows] = results;
+            res.header(&apos;Access-Control-Allow-Origin&apos;, &quot;*&quot;);
+            res.header(&apos;Access-Control-Allow-Headers&apos;, &quot;Origin, X-Requested-With, Content-Type, Accept&quot;);
+            res.status(200).send(rows);
+        })
+        .catch(error =&gt; {
+            console.log(error);
+        })
+}
+</code></pre><p>最後に、BigQueryにアクセスするため、BigQueryAPIの依存関係を追加します。  </p>
+<pre><code>  &quot;dependencies&quot;: {
+    &quot;@google-cloud/bigquery&quot;: &quot;^5.10.0&quot;
+  }
+</code></pre><p>Cloud Functionをデプロイします。
+【ToDo】詳細な設定手順を記載する
+<img src="img/draw_flow_0.png" alt>  </p>
+<p>動作確認をします。
+<img src="img/draw_flow_0.png" alt>  </p>
+<p>以上で、バックエンドの処理は完了です。</p>
+<div id="anchors-navbar"><i class="fa fa-anchor"></i><ul><p><a href="#検索プログラムの作成">検索プログラムの作成</a></p><li><a href="#Cloud_Functionの設定">1. Cloud Functionの設定</a></li><li><a href="#BigQueryAPIのコード">2. BigQueryAPIのコード</a></li></ul></div><a href="#Cloud_Functionの設定" id="goTop"><i class="fa fa-arrow-up"></i></a>
                                 
                                 </section>
                             
@@ -313,12 +312,12 @@ project_id = &quot;neural-sol-325512&quot;
 
             
                 
-                <a href="Section2.html" class="navigation navigation-prev " aria-label="Previous page: 1. GCP各種サービスの設定">
+                <a href="Section2.html" class="navigation navigation-prev " aria-label="Previous page: 1. テストデータの登録">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="Section4.html" class="navigation navigation-next " aria-label="Next page: 3. 各処理の実行と処理結果の確認">
+                <a href="Section4.html" class="navigation navigation-next " aria-label="Next page: 3. GoogleMapへ反映">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -329,7 +328,7 @@ project_id = &quot;neural-sol-325512&quot;
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"2. ダウンロードしたファイルの解凍と設定","level":"1.4","depth":1,"next":{"title":"3. 各処理の実行と処理結果の確認","level":"1.5","depth":1,"path":"Section4.md","ref":"Section4.md","articles":[]},"previous":{"title":"1. GCP各種サービスの設定","level":"1.3","depth":1,"path":"Section2.md","ref":"Section2.md","articles":[]},"dir":"ltr"},"config":{"plugins":["search-pro-fixed","-lunr","-search","hide-published-with","anchors","navigator","collapsible-chapters","hints","copy-code-button","custom-favicon","insert-logo"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"collapsible-chapters":{},"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"search-pro-fixed":{},"hide-published-with":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"favicon":"./img/miracleave.ico","navigator":{},"custom-favicon":{},"copy-code-button":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{},"insert-logo":{"url":"./img/miracleave.png","style":"background: none; width: 100%;"}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"mirameet","language":"ja","gitbook":"*"},"file":{"path":"Section3.md","mtime":"2021-10-01T14:00:41.121Z","type":"markdown"},"gitbook":{"version":"3.6.21","time":"2021-10-01T14:06:03.902Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"2. 検索プログラムの作成","level":"1.4","depth":1,"next":{"title":"3. GoogleMapへ反映","level":"1.5","depth":1,"path":"Section4.md","ref":"Section4.md","articles":[]},"previous":{"title":"1. テストデータの登録","level":"1.3","depth":1,"path":"Section2.md","ref":"Section2.md","articles":[]},"dir":"ltr"},"config":{"plugins":["search-pro-fixed","-lunr","-search","hide-published-with","anchors","navigator","collapsible-chapters","hints","copy-code-button","custom-favicon","insert-logo"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"collapsible-chapters":{},"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"search-pro-fixed":{},"hide-published-with":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"favicon":"./img/miracleave.ico","navigator":{},"custom-favicon":{},"copy-code-button":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{},"insert-logo":{"url":"./img/miracleave.png","style":"background: none; width: 100%;"}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"mirameet","language":"ja","gitbook":"*"},"file":{"path":"Section3.md","mtime":"2022-01-26T23:51:17.200Z","type":"markdown"},"gitbook":{"version":"3.7.1","time":"2022-01-31T00:37:50.252Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>

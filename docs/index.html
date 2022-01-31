@@ -6,7 +6,7 @@
         <title>はじめに · mirameet</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
-        <meta name="generator" content="HonKit 3.6.21">
+        <meta name="generator" content="HonKit 3.7.1">
         
         
         
@@ -137,7 +137,7 @@
                 <a href="Section2.html">
             
                     
-                    1. GCP各種サービスの設定
+                    1. テストデータの登録
             
                 </a>
             
@@ -150,7 +150,7 @@
                 <a href="Section3.html">
             
                     
-                    2. ダウンロードしたファイルの解凍と設定
+                    2. 検索プログラムの作成
             
                 </a>
             
@@ -163,7 +163,7 @@
                 <a href="Section4.html">
             
                     
-                    3. 各処理の実行と処理結果の確認
+                    3. GoogleMapへ反映
             
                 </a>
             
@@ -229,32 +229,29 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="GCP初心者必見！_PythonでBigQueryの操作をしてみよう！"><a name="gcp初心者必見！-pythonでbigqueryの操作をしてみよう！" class="plugin-anchor" href="#gcp初心者必見！-pythonでbigqueryの操作をしてみよう！"><i class="fa fa-link" aria-hidden="true"></i></a>GCP初心者必見！ PythonでBigQueryの操作をしてみよう！</h1>
-<p>第24回目の開催となるmirameetの題材はGCP初心者必見★<br>今回のハンズオンはGoogle Cloud Storageの開発Tipsも取り込んだ内容になっています！  </p>
+                                <h1 id="【タイトル】"><a name="【タイトル】" class="plugin-anchor" href="#【タイトル】"><i class="fa fa-link" aria-hidden="true"></i></a>【タイトル】</h1>
+<p>第26回目の開催となる【タイトル】です！  </p>
 <hr>
-<h2 id="事前準備">1. 事前準備</h2>
+<h2 id="今回のやりたいこと">1. 今回のやりたいこと</h2>
+<p>GoogleMapではお気に入りの地図情報をリストとして保存することが出来ますが、リスト内の検索が出来ません・・・。<br>では、作ってしまおう!!ということで、
+今回は、お気に入りの地図情報をBigQueryに溜めて絞り込みを行い、GoogleMapに反映してみたいと思います！<br>BigQueryの絞り込みや、GoogleMapの反映はGoogleMapAPI・BigQueryAPIを使用します。<br>また、開発の実行環境はCloud Shell Editer、バックエンドのサーバーはClud Functionを使用します。  </p>
+<h2 id="事前準備">2. 事前準備</h2>
 <ul>
-<li>Dockerインストール</li>
+<li>Googleアカウント作成</li>
 <li>GCPアカウントの作成</li>
 </ul>
-<h2 id="今回の流れ">2. 今回の流れ</h2>
-<p><img src="img/draw_flow_0.png" alt><br>Pythonで、以下処理を行うプログラムを実行します。<br>①CSVファイルをGCS(GoogleCloudStrage)へアップロード<br>②アップロードしたデータをBigQueryにインサート<br>③BigQueryにインサートしたデータを更新・削除<br>④BigQuery内のテーブルデータをGCSへエクスポート  </p>
-<h2 id="技術要素">3. 技術要素</h2>
-<p>公式サイトのリンクを記載しておきますので、参考にお使いください。  </p>
+<h2 id="手順">3. 手順</h2>
+<p><img src="img/draw_flow_0.png" alt><br>全体手順としては次の流れで進めます。<br> 0.事前準備内容の確認<br> 1.テストデータの登録<br> 2.検索プログラムの作成<br> 3.GoogleMapへ反映  </p>
+<h2 id="技術要素">4. 技術要素</h2>
+<p>参考サイトのリンクを記載しておきますので、参考にお使いください。  </p>
 <ul>
-<li><a href="https://console.cloud.google.com/?hl=ja" target="_blank">GCP</a></li>
-<li><a href="https://www.docker.com/" target="_blank">Docker</a></li>
-<li><a href="https://www.python.jp/" target="_blank">python</a></li>
+<li><a href="https://developers.google.com/maps/documentation/javascript/local-context/samples/neighborhood" target="_blank">GoogleMapAPI</a></li>
+<li><a href="https://qiita.com/zaburo/items/344ed0caab369c2f94c5" target="_blank">BigQueryAPI</a></li>
+<li><a href="https://cloud.google.com/bigquery/docs/loading-data-cloud-storage-json#bq" target="_blank">JSON形式のBigQuery取り込み</a></li>
 </ul>
-<h2 id="手順">4. 手順</h2>
-<p>全体手順としては次の流れで進めます。<br> 0.事前準備内容の確認<br> 1.GCP各種サービスの設定<br> 2.ダウンロードしたファイルの解凍と設定<br> 3.各処理の実行と処理結果の確認  </p>
 <hr>
-<p>Windows/Macの方向けに作成しております。<br>コマンドラインツールは、個々の利用しているもので良いのですが、今回の手順は次のものを利用します。  </p>
-<ul>
-<li>Windows：コマンドプロンプト</li>
-<li>Mac：ターミナル</li>
-</ul>
-<div id="anchors-navbar"><i class="fa fa-anchor"></i><ul><p><a href="#GCP初心者必見！_PythonでBigQueryの操作をしてみよう！">GCP初心者必見！ PythonでBigQueryの操作をしてみよう！</a></p><li><a href="#事前準備">1. 事前準備</a></li><li><a href="#今回の流れ">2. 今回の流れ</a></li><li><a href="#技術要素">3. 技術要素</a></li><li><a href="#手順">4. 手順</a></li></ul></div><a href="#事前準備" id="goTop"><i class="fa fa-arrow-up"></i></a>
+<p>今回の手順ではGoogleChromeのみ使用します。OS問わずハンズオン可能です。</p>
+<div id="anchors-navbar"><i class="fa fa-anchor"></i><ul><p><a href="#【タイトル】">【タイトル】</a></p><li><a href="#今回のやりたいこと">1. 今回のやりたいこと</a></li><li><a href="#事前準備">2. 事前準備</a></li><li><a href="#手順">3. 手順</a></li><li><a href="#技術要素">4. 技術要素</a></li></ul></div><a href="#今回のやりたいこと" id="goTop"><i class="fa fa-arrow-up"></i></a>
                                 
                                 </section>
                             
@@ -293,7 +290,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"はじめに","level":"1.1","depth":1,"next":{"title":"0. 事前準備内容の確認","level":"1.2","depth":1,"path":"Section1.md","ref":"Section1.md","articles":[]},"dir":"ltr"},"config":{"plugins":["search-pro-fixed","-lunr","-search","hide-published-with","anchors","navigator","collapsible-chapters","hints","copy-code-button","custom-favicon","insert-logo"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"collapsible-chapters":{},"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"search-pro-fixed":{},"hide-published-with":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"favicon":"./img/miracleave.ico","navigator":{},"custom-favicon":{},"copy-code-button":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{},"insert-logo":{"url":"./img/miracleave.png","style":"background: none; width: 100%;"}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"mirameet","language":"ja","gitbook":"*"},"file":{"path":"README.md","mtime":"2021-10-01T14:00:41.120Z","type":"markdown"},"gitbook":{"version":"3.6.21","time":"2021-10-01T14:06:03.902Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"はじめに","level":"1.1","depth":1,"next":{"title":"0. 事前準備内容の確認","level":"1.2","depth":1,"path":"Section1.md","ref":"Section1.md","articles":[]},"dir":"ltr"},"config":{"plugins":["search-pro-fixed","-lunr","-search","hide-published-with","anchors","navigator","collapsible-chapters","hints","copy-code-button","custom-favicon","insert-logo"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"collapsible-chapters":{},"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"search-pro-fixed":{},"hide-published-with":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"favicon":"./img/miracleave.ico","navigator":{},"custom-favicon":{},"copy-code-button":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{},"insert-logo":{"url":"./img/miracleave.png","style":"background: none; width: 100%;"}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"mirameet","language":"ja","gitbook":"*"},"file":{"path":"README.md","mtime":"2022-01-26T05:00:00.716Z","type":"markdown"},"gitbook":{"version":"3.7.1","time":"2022-01-31T00:37:50.252Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>

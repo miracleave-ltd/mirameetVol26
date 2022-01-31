@@ -6,7 +6,7 @@
         <title>4. おまけ · mirameet</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
-        <meta name="generator" content="HonKit 3.6.21">
+        <meta name="generator" content="HonKit 3.7.1">
         
         
         
@@ -137,7 +137,7 @@
                 <a href="Section2.html">
             
                     
-                    1. GCP各種サービスの設定
+                    1. テストデータの登録
             
                 </a>
             
@@ -150,7 +150,7 @@
                 <a href="Section3.html">
             
                     
-                    2. ダウンロードしたファイルの解凍と設定
+                    2. 検索プログラムの作成
             
                 </a>
             
@@ -163,7 +163,7 @@
                 <a href="Section4.html">
             
                     
-                    3. 各処理の実行と処理結果の確認
+                    3. GoogleMapへ反映
             
                 </a>
             
@@ -230,23 +230,15 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="おまけ"><a name="おまけ" class="plugin-anchor" href="#おまけ"><i class="fa fa-link" aria-hidden="true"></i></a>おまけ</h1>
-<p>この手順では、作成したテーブルやバケットの削除をします  </p>
+<p>最後に、APIの無効化や、作成したものを削除をします。  </p>
 <p>※無料期間が終了しても自動で課金されることはありません<br>　GCP内をCleanUpしたい方は以下手順を行ってください  </p>
-<h2 id="バケットの削除">1. バケットの削除</h2>
-<p><img src="img/bucket_delete.png" alt>  </p>
-<p><img src="img/bucket_delete2.png" alt>  </p>
-<h2 id="データセットの削除">2. データセットの削除</h2>
-<p><img src="img/table_delete.png" alt>  </p>
-<p><img src="img/table_delete2.png" alt>  </p>
-<h2 id="Dockerコンテナの停止">3. Dockerコンテナの停止</h2>
-<p>起動中のコンテナの確認  </p>
-<pre><code>docker-compose ps
-</code></pre><p>コンテナの停止  </p>
-<pre><code>docker-compose down
-</code></pre><p>コンテナが停止されたことの確認  </p>
-<pre><code>docker-compose ps
-</code></pre><p><img src="img/docker_down.png" alt>  </p>
-<div id="anchors-navbar"><i class="fa fa-anchor"></i><ul><p><a href="#おまけ">おまけ</a></p><li><a href="#バケットの削除">1. バケットの削除</a></li><li><a href="#データセットの削除">2. データセットの削除</a></li><li><a href="#Dockerコンテナの停止">3. Dockerコンテナの停止</a></li></ul></div><a href="#バケットの削除" id="goTop"><i class="fa fa-arrow-up"></i></a>
+<h2 id="API無効化">1. API無効化</h2>
+<p><img src="img/draw_flow_0.png" alt>  </p>
+<h2 id="BigQueryの削除">2. BigQueryの削除</h2>
+<p><img src="img/draw_flow_0.png" alt>  </p>
+<h2 id="Cloud_Functionの削除">3. Cloud Functionの削除</h2>
+<p><img src="img/draw_flow_0.png" alt>  </p>
+<div id="anchors-navbar"><i class="fa fa-anchor"></i><ul><p><a href="#おまけ">おまけ</a></p><li><a href="#API無効化">1. API無効化</a></li><li><a href="#BigQueryの削除">2. BigQueryの削除</a></li><li><a href="#Cloud_Functionの削除">3. Cloud Functionの削除</a></li></ul></div><a href="#API無効化" id="goTop"><i class="fa fa-arrow-up"></i></a>
                                 
                                 </section>
                             
@@ -273,7 +265,7 @@
 
             
                 
-                <a href="Section4.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: 3. 各処理の実行と処理結果の確認">
+                <a href="Section4.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: 3. GoogleMapへ反映">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
@@ -285,7 +277,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"4. おまけ","level":"1.6","depth":1,"previous":{"title":"3. 各処理の実行と処理結果の確認","level":"1.5","depth":1,"path":"Section4.md","ref":"Section4.md","articles":[]},"dir":"ltr"},"config":{"plugins":["search-pro-fixed","-lunr","-search","hide-published-with","anchors","navigator","collapsible-chapters","hints","copy-code-button","custom-favicon","insert-logo"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"collapsible-chapters":{},"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"search-pro-fixed":{},"hide-published-with":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"favicon":"./img/miracleave.ico","navigator":{},"custom-favicon":{},"copy-code-button":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{},"insert-logo":{"url":"./img/miracleave.png","style":"background: none; width: 100%;"}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"mirameet","language":"ja","gitbook":"*"},"file":{"path":"Section5.md","mtime":"2021-10-01T14:00:41.121Z","type":"markdown"},"gitbook":{"version":"3.6.21","time":"2021-10-01T14:06:03.902Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"4. おまけ","level":"1.6","depth":1,"previous":{"title":"3. GoogleMapへ反映","level":"1.5","depth":1,"path":"Section4.md","ref":"Section4.md","articles":[]},"dir":"ltr"},"config":{"plugins":["search-pro-fixed","-lunr","-search","hide-published-with","anchors","navigator","collapsible-chapters","hints","copy-code-button","custom-favicon","insert-logo"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"collapsible-chapters":{},"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"search-pro-fixed":{},"hide-published-with":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"favicon":"./img/miracleave.ico","navigator":{},"custom-favicon":{},"copy-code-button":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{},"insert-logo":{"url":"./img/miracleave.png","style":"background: none; width: 100%;"}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"mirameet","language":"ja","gitbook":"*"},"file":{"path":"Section5.md","mtime":"2022-01-26T04:58:41.802Z","type":"markdown"},"gitbook":{"version":"3.7.1","time":"2022-01-31T00:37:50.252Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>
