@@ -1,0 +1,9 @@
+2022-03-19 12:19:40,122 - 商品データ登録 - INFO - == batch処理開始 ==
+2022-03-19 12:19:40,124 - 商品データ登録 - INFO - base_dir = /meetup/app/batch/bathes
+2022-03-19 12:19:40,125 - 商品データ登録 - INFO - db_path = /meetup/app/batch/bathes/db.sqlite3
+2022-03-19 12:19:40,127 - 商品データ登録 - INFO - === > Start DB登録 ==
+2022-03-19 12:19:40,169 - 商品データ登録 - DEBUG - add_data = {'_state': <django.db.models.base.ModelState object at 0x7f10231d8a60>, 'code': '35', 'name': 'apple', 'explanation': 'mamde in usa', 'price': '200', 'create_at': datetime.datetime(2022, 3, 19, 12, 19, 40, 143767), 'update_at': datetime.datetime(2022, 3, 19, 12, 19, 40, 143866), 'create_user': '999', 'update_user': '999'}
+2022-03-19 12:19:40,211 - 商品データ登録 - DEBUG - add_data = {'_state': <django.db.models.base.ModelState object at 0x7f1023225f70>, 'code': '36', 'name': 'orange', 'explanation': 'mamde in japan', 'price': '500', 'create_at': datetime.datetime(2022, 3, 19, 12, 19, 40, 189705), 'update_at': datetime.datetime(2022, 3, 19, 12, 19, 40, 189747), 'create_user': '999', 'update_user': '999'}
+2022-03-19 12:19:40,241 - 商品データ登録 - DEBUG - add_data = {'_state': <django.db.models.base.ModelState object at 0x7f10231c6070>, 'code': '37', 'name': 'computer', 'explanation': 'mac', 'price': '5000', 'create_at': datetime.datetime(2022, 3, 19, 12, 19, 40, 220542), 'update_at': datetime.datetime(2022, 3, 19, 12, 19, 40, 220569), 'create_user': '999', 'update_user': '999'}
+2022-03-19 12:19:40,242 - 商品データ登録 - INFO - === > End DB登録 ==
+2022-03-19 12:19:40,243 - 商品データ登録 - INFO - == batch処理終了 ==

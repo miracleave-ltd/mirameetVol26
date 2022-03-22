@@ -1,0 +1,51 @@
+{% extends "common/base.html" %}
+
+{% block title %}
+商品情報詳細
+{% endblock title %}
+
+{% block pagetitle %}
+商品情報詳細
+{% endblock pagetitle %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col">
+            {% for img in object.r_prdct_img.all %}
+            <img src="{{ img.image.url }}" width="95%"/>
+            {% endfor %}
+        </div>
+        <div class="col">
+            <table class="table table-striped table-bordered">
+                <tbody>
+                    <tr>
+                        <th>商品コード</th>
+                        <td>{{ object.code }}</td>
+                    </tr>
+                    <tr>
+                        <th>商品名</th>
+                        <td>{{ object.name }}</td>
+                    </tr>
+                    <tr>
+                        <th>商品説明</th>
+                        <td>{{ object.explanation }}</td>
+                    </tr>
+                    <tr>
+                        <th>商品価格（税抜き）</th>
+                        <td>{{ object.price }}</td>
+                    </tr>
+                    <tr>
+                        <th>商品価格（税込み）</th>
+                        <td>{{ tax_include_price }}</td>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <td><a href="{% url 'product:product_update' pk=object.code %}" type="button" class="btn btn-outline-info" name="update">更新</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock content %}

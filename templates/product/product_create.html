@@ -1,0 +1,54 @@
+{% extends "common/base.html" %}
+
+{% block title %}
+商品情報登録
+{% endblock title %}
+
+{% block pagetitle %}
+商品情報登録
+{% endblock pagetitle %}
+
+{% block content %}
+
+<form method="POST" enctype="multipart/form-data" novalidate>
+{% csrf_token %}
+<div class="card">
+    <h5 class="card-header">入力項目</h5>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group">
+                    {% include "product/component/product_field_create.html" with field=form.code %}
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="form-group">
+                    {% include "product/component/product_field_create.html" with field=form.name %}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">  
+                <div class="form-group">
+                    {% include "product/component/product_field_create.html" with field=form.explanation %}
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="form-group">
+                    {% include "product/component/product_field_create.html" with field=form.image %}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">  
+                <div class="form-group">
+                    {% include "product/component/product_field_create.html" with field=form.price %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer">
+        <button type="submit" class="btn btn-danger">登録</button>
+    </div>
+</div>
+{% endblock content %}

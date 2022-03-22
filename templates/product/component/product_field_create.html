@@ -1,0 +1,15 @@
+{% load widget_tweaks %}
+
+<label for={{ field.id_for_label }} class="form-label">
+    {% if label %}{{ label }}{% else %}{{ field.label }}{% endif %}
+</label>
+
+{% if field.errors %}
+    {% render_field field class="form-control is-invalid" %}
+{% else %}
+    {% render_field field class="form-control" %}
+{% endif %}
+
+{% for err_msg in field.errors %}
+    <div id="{{ field.id_for_label }}" class="invalid-feedback">{{ err_msg }}</div>
+{% endfor %}

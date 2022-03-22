@@ -1,0 +1,21 @@
+{% extends "common/base.html" %}
+{% load static %}
+{% block title %}
+トップページ
+{% endblock title %}
+
+{% block pagetitle %}
+トップページ
+{% endblock pagetitle %}
+
+{% block content %}
+<figure class="container" style="position:relative;">
+    <img src="{% static 'image/mira-top.png' %}">
+    <div style="position:absolute;top:0;right:30px;">
+        <img src="{% static 'image/mira-qr.png' %}">
+    </div>
+    <figcaption style="position:absolute;top:30%;right:30px;color:#fff;background:rgba(0,0,0,.6);">
+        <p style="margin:0;">miracleaveの情報はコチラ↑</p>
+    </figcaption>
+</figure>
+{% endblock content %}

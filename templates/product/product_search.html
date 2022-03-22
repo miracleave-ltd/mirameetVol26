@@ -1,0 +1,59 @@
+{% extends "common/base.html" %}
+
+{% block title %}
+商品情報検索
+{% endblock title %}
+
+{% block pagetitle %}
+商品情報検索
+{% endblock pagetitle %}
+
+{% block content %}
+<div class="card">
+    <h5 class="card-header">検索項目</h5>
+    <form method="GET">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group">
+                        {% include "product/component/product_field.html" with field=filter.form.code %}
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        {% include "product/component/product_field.html" with field=filter.form.name %}
+                    </div>
+                </div>
+            </div>
+        </div>    
+    <div class="card-footer">
+        <button type="submit" class="btn btn-primary" name="product_search">検索</button>
+    </div>
+    </form>
+</div>
+<br>
+<div class="card">
+    <h5 class="card-header card-info">検索結果リスト出力</h5>
+    <div class="card-body">
+        <table class="table table-hover table-bordered table-striped">
+            <thead>
+            <tr>
+                <th>商品コード</th>
+                <th>商品名</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+                {% for object in object_list %}
+                <tr>
+                    <td>{{ object.code }}</td>
+                    <td>{{ object.name }}</td>
+                    <td><a href="{% url 'product:product_detail' pk=object.code %}" type="button" class="btn btn-outline-info" name="detail">詳細</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% include 'common/pagenation.html' %}
+</div>
+{% endblock content %}
