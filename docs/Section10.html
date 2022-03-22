@@ -1,0 +1,487 @@
+
+<!DOCTYPE HTML>
+<html lang="ja" >
+    <head>
+        <meta charset="UTF-8">
+        <title>7. Pytest エラーの修正 -回答- · mirameet</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="HonKit 3.6.20">
+        
+        
+        
+    
+    <link rel="stylesheet" href="gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-search-pro-fixed/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-anchors/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-navigator/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-collapsible-chapters/collapsible-chapters.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-hints/plugin-hints.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-insert-logo/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="Section11.html" />
+    
+    
+    <link rel="prev" href="Section9.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book honkit-cloak">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="検索ワードを入力" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    はじめに
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="Section2.html">
+            
+                <a href="Section2.html">
+            
+                    
+                    1. デモアプリクローン
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="Section3.html">
+            
+                <a href="Section3.html">
+            
+                    
+                    2. アプリケーションコード修正を行う前に
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="Section4.html">
+            
+                <a href="Section4.html">
+            
+                    
+                    3. アプリケーションコード修正（商品情報検索画面）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="Section5.html">
+            
+                <a href="Section5.html">
+            
+                    
+                    4. アプリケーションコード修正（商品情報詳細画面）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="Section8.html">
+            
+                <a href="Section8.html">
+            
+                    
+                    5. Pytest
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="Section9.html">
+            
+                <a href="Section9.html">
+            
+                    
+                    6. Pytest エラーの修正 -問題-
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.8" data-path="Section10.html">
+            
+                <a href="Section10.html">
+            
+                    
+                    7. Pytest エラーの修正 -回答-
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="Section11.html">
+            
+                <a href="Section11.html">
+            
+                    
+                    8. 構築環境の掃除
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://github.com/honkit/honkit" target="blank" class="gitbook-link">
+            HonKitで公開 
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="." >7. Pytest エラーの修正 -回答-</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="Pytest_エラーの修正_-回答-"><a name="pytest-エラーの修正--回答-" class="plugin-anchor" href="#pytest-エラーの修正--回答-"><i class="fa fa-link" aria-hidden="true"></i></a>Pytest エラーの修正 -回答-</h1>
+<p>こちらはエラー修正箇所の回答になります。<br>
+以下のコードを既存の箇所と置き換えるとすべてのテストがパス（成功）するようになります。</p>
+<p>すべて修正できたら、以下のコマンドを実行します。</p>
+<pre><code class="lang-sh">docker-compose <span class="hljs-built_in">exec</span> web pytest
+</code></pre>
+<p>修正箇所がすべて解消できていれば、現在以下の内容がターミナルに出力されていると思います。</p>
+<blockquote>
+<p>7 passed</p>
+</blockquote>
+<h2 id="回答">1. 回答</h2>
+<h3 id="Question１">1.1. Question１</h3>
+<ul>
+<li><p>修正内容：期待値としている箇所 <code>expected</code> では2件となっていたため、期待値が1件となるように <code>expected = 1</code> と修正する。</p>
+<pre><code class="lang-python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">test_create</span>(<span class="hljs-params">cursor</span>):</span>
+  insert_query = <span class="hljs-string">&quot;insert into product_product values(&apos;99&apos;,&apos;テストプラン&apos;,&apos;これはテストプランです&apos;, &apos;99999&apos;, &apos;2021-08-18&apos;,&apos;2021-08-19&apos;,&apos;createuser&apos;,&apos;updateuser&apos;);&quot;</span>
+  cursor.execute(insert_query)
+
+  <span class="hljs-comment"># 件数確認</span>
+  counts_query = <span class="hljs-string">&quot;select count(1) from product_product;&quot;</span>
+  cursor.execute(counts_query)
+  result = cursor.fetchone()[<span class="hljs-number">0</span>]
+  <span class="hljs-comment"># 1件のデータを入れたため1件の結果を想定</span>
+  expected = <span class="hljs-number">1</span> <span class="hljs-comment"># 修正箇所</span>
+
+  <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;result:{}&quot;</span>.<span class="hljs-built_in">format</span>(result))
+  <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;expected:{}&quot;</span>.<span class="hljs-built_in">format</span>(expected))
+  <span class="hljs-keyword">assert</span> result == expected
+</code></pre>
+</li>
+</ul>
+<h3 id="Question2">1.2. Question2</h3>
+<ul>
+<li><p>修正内容：構文が誤っていたため、「期待値と取得値が等しいこと」となるように、<code>assert result == expected</code> と修正する。</p>
+<pre><code class="lang-python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">test_update</span>(<span class="hljs-params">cursor</span>):</span>
+  <span class="hljs-comment"># 1件のデータを挿入</span>
+  insert_query = <span class="hljs-string">&quot;insert into product_product values(&apos;99&apos;,&apos;テストプラン&apos;,&apos;これはテストプランです&apos;, &apos;99999&apos;, &apos;2021-08-18&apos;,&apos;2021-08-19&apos;,&apos;createuser&apos;,&apos;updateuser&apos;);&quot;</span>
+  cursor.execute(insert_query)
+  <span class="hljs-comment"># code=99のnameをtest99に変更する</span>
+  update_query = <span class="hljs-string">&quot;update product_product set name = &apos;test99&apos; where code = 99;&quot;</span>
+  cursor.execute(update_query)
+
+  <span class="hljs-comment"># データ取得</span>
+  select_query = <span class="hljs-string">&quot;select name from product_product where code = 99;&quot;</span>
+  cursor.execute(select_query)
+  result = cursor.fetchone()[<span class="hljs-number">0</span>]
+
+  expected = <span class="hljs-string">&apos;test99&apos;</span> <span class="hljs-comment"># code=99のnameがtest99になっていることを確認</span>
+
+  <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;result:{}&quot;</span>.<span class="hljs-built_in">format</span>(result))
+  <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;expected:{}&quot;</span>.<span class="hljs-built_in">format</span>(expected))
+  <span class="hljs-keyword">assert</span> result == expected <span class="hljs-comment"># 修正箇所</span>
+</code></pre>
+</li>
+</ul>
+<h3 id="Question3">1.3. Question3</h3>
+<ul>
+<li><p>修正内容： urls.pyから、 <code>/product/search/</code> のリクエストに対応する テンプレートは <code>product_search</code> のため、 <code>{&apos;temp_name&apos;: &apos;product:product_search&apos;, &apos;url&apos;: &apos;/product/search/&apos;},</code> となるように修正する。</p>
+<pre><code class="lang-python"><span class="hljs-meta">@pytest.mark.django_db</span>
+<span class="hljs-meta">@pytest.mark.parametrize(<span class="hljs-params"><span class="hljs-string">&apos;param&apos;</span>, [
+  {<span class="hljs-string">&apos;temp_name&apos;</span>: <span class="hljs-string">&apos;product:product_search&apos;</span>, <span class="hljs-string">&apos;url&apos;</span>: <span class="hljs-string">&apos;/product/search/&apos;</span>},　<span class="hljs-comment">#　修正箇所</span>
+  {<span class="hljs-string">&apos;temp_name&apos;</span>: <span class="hljs-string">&apos;product:product_detail&apos;</span>, <span class="hljs-string">&apos;url&apos;</span>: <span class="hljs-string">&apos;/product/detail/1&apos;</span>},
+  {<span class="hljs-string">&apos;temp_name&apos;</span>: <span class="hljs-string">&apos;product:product_create&apos;</span>, <span class="hljs-string">&apos;url&apos;</span>: <span class="hljs-string">&apos;/product/create/&apos;</span>},
+  {<span class="hljs-string">&apos;temp_name&apos;</span>: <span class="hljs-string">&apos;product:product_update&apos;</span>, <span class="hljs-string">&apos;url&apos;</span>: <span class="hljs-string">&apos;/product/update/1/&apos;</span>}
+]</span>)</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">test_render_views</span>(<span class="hljs-params">client, param, get_model</span>):</span>
+
+  <span class="hljs-keyword">if</span> param[<span class="hljs-string">&apos;temp_name&apos;</span>] == <span class="hljs-string">&apos;product:product_detail&apos;</span> <span class="hljs-keyword">or</span> \
+          param[<span class="hljs-string">&apos;temp_name&apos;</span>] == <span class="hljs-string">&apos;product:product_update&apos;</span>:
+      temp_url = urls.reverse(param[<span class="hljs-string">&apos;temp_name&apos;</span>], args=(<span class="hljs-number">1</span>,))
+  <span class="hljs-keyword">else</span>:
+      temp_url = urls.reverse(param[<span class="hljs-string">&apos;temp_name&apos;</span>])
+
+  <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;result:{}&quot;</span>.<span class="hljs-built_in">format</span>(temp_url))
+  <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;expected:{}&quot;</span>.<span class="hljs-built_in">format</span>(param[<span class="hljs-string">&apos;url&apos;</span>]))
+  <span class="hljs-comment"># 正しいテンプレートを使用しているかテスト</span>
+  <span class="hljs-keyword">assert</span> temp_url == param[<span class="hljs-string">&apos;url&apos;</span>]
+
+  response = client.get(temp_url)
+
+  <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;result:{}&quot;</span>.<span class="hljs-built_in">format</span>(response.status_code))
+  <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;expected:{}&quot;</span>.<span class="hljs-built_in">format</span>(<span class="hljs-number">200</span>))
+  <span class="hljs-comment"># 正しいステータスコードかをテスト</span>
+  <span class="hljs-keyword">assert</span> response.status_code == <span class="hljs-number">200</span>
+</code></pre>
+</li>
+</ul>
+<div id="anchors-navbar"><i class="fa fa-anchor"></i><ul><p><a href="#Pytest_エラーの修正_-回答-">Pytest エラーの修正 -回答-</a></p><li><a href="#回答">1. 回答</a></li><ul><li><a href="#Question１">1.1. Question１</a></li><li><a href="#Question2">1.2. Question2</a></li><li><a href="#Question3">1.3. Question3</a></li></ul></ul></div><a href="#回答" id="goTop"><i class="fa fa-arrow-up"></i></a>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="Section9.html" class="navigation navigation-prev " aria-label="Previous page: 6. Pytest エラーの修正 -問題-">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="Section11.html" class="navigation navigation-next " aria-label="Next page: 8. 構築環境の掃除">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"7. Pytest エラーの修正 -回答-","level":"1.8","depth":1,"next":{"title":"8. 構築環境の掃除","level":"1.9","depth":1,"path":"Section11.md","ref":"Section11.md","articles":[]},"previous":{"title":"6. Pytest エラーの修正 -問題-","level":"1.7","depth":1,"path":"Section9.md","ref":"Section9.md","articles":[]},"dir":"ltr"},"config":{"plugins":["search-pro-fixed","-lunr","-search","hide-published-with","anchors","navigator","collapsible-chapters","hints","copy-code-button","custom-favicon","insert-logo"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"collapsible-chapters":{},"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"search-pro-fixed":{},"hide-published-with":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"favicon":"./img/miracleave.ico","navigator":{},"custom-favicon":{},"copy-code-button":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{},"insert-logo":{"url":"./img/miracleave.png","style":"background: none; width: 100%;"}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"mirameet","language":"ja","gitbook":"*"},"file":{"path":"Section10.md","mtime":"2021-09-09T12:53:15.952Z","type":"markdown"},"gitbook":{"version":"3.6.20","time":"2021-09-09T13:00:39.267Z"},"basePath":".","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <noscript>
+        <style>
+            .honkit-cloak {
+                display: block !important;
+            }
+        </style>
+    </noscript>
+    <script>
+        // Restore sidebar state as critical path for prevent layout shift
+        function __init__getSidebarState(defaultValue){
+            var baseKey = "";
+            var key = baseKey + ":sidebar";
+            try {
+                var value = localStorage[key];
+                if (value === undefined) {
+                    return defaultValue;
+                }
+                var parsed = JSON.parse(value);
+                return parsed == null ? defaultValue : parsed;
+            } catch (e) {
+                return defaultValue;
+            }
+        }
+        function __init__restoreLastSidebarState() {
+            var isMobile = window.matchMedia("(max-width: 600px)").matches;
+            if (isMobile) {
+                // Init last state if not mobile
+                return;
+            }
+            var sidebarState = __init__getSidebarState(true);
+            var book = document.querySelector(".book");
+            // Show sidebar if it enabled
+            if (sidebarState && book) {
+                book.classList.add("without-animation", "with-summary");
+            }
+        }
+
+        try {
+            __init__restoreLastSidebarState();
+        } finally {
+            var book = document.querySelector(".book");
+            book.classList.remove("honkit-cloak");
+        }
+    </script>
+    <script src="gitbook/gitbook.js"></script>
+    <script src="gitbook/theme.js"></script>
+    
+        
+        <script src="gitbook/gitbook-plugin-search-pro-fixed/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search-pro-fixed/search.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-hide-published-with/plugin.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-collapsible-chapters/collapsible-chapters.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-insert-logo/plugin.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

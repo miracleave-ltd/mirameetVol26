@@ -1,86 +1,189 @@
-# GoogleMapへ反映  
-この手順では、GoogleMapJavaSciriptAPIを使い、BigQueryの情報を絞り込んでピン止めするプログラムを  
-Web上で開発出来るCloud Shell Editerを使って開発していきます。  
-また、開発したプログラムはCloud Shell Editerで実行し、動作確認をしていきます。  
-![](img/draw_flow_0.png)  
+# アプリケーションコード修正（商品情報登録画面）
+当手順では以下赤枠部分の商品登録画面のコードを修正していきます。
+
+![](./img/27.png)
+
+## 当画面に関連するソースファイル
+
+- app\product\views\product_create_view.py **←修正対象**
+- app\product\urls.py **←修正対象**
+- templates\product\product_create.html
 
 
-## ソースコードの取得  
-Googleが提供しているSimpleMapのソースコードをベースに作成していきます。
-Googleドキュメントを開きます。  
-https://developers.google.com/maps/documentation/javascript/examples/map-simple  
+修正する前に一度、状況を確認してみましょう。
 
-少しページをスクロールしたところにサンプルのソースコードがあります。  
-Google Cloud Shellを選択し、コードを取得します。  
-![](img/draw_flow_0.png)  
+http://localhost:7777
 
-Cloud Shell Editerが開き、ソースコードが配置されています。  
-フロントエンドの動作確認は全てCloud Shell Editer上から可能です。  
-![](img/draw_flow_0.png)  
+登録画面、機能が実装できていないことが確認できたかと思います。
 
-まずは、サンプルコードを実行してみましょ。  
-左欄からDebugを選び、再生ボタンをクリックします。  
-![](img/draw_flow_0.png)  
+確認できたところで、あらためて修正をすすめていきましょう！
 
-右上にあるプレビューボタンからWebページの動作を確認します。
-![](img/draw_flow_0.png)  
+## Viewの修正
+画面からボタンを押下した際に、画面に入力した値をDBへ登録する処理を実装します。
 
-## BigQueryとの連携
-手順②で作成したCloud FunctionではBigQueryにアクセスし、検索結果をレスポンスで返却しているので、  
-Cloud FuctionのURLをTypeScriptから実行し、レスポンス情報を取得して、GoogleMapAPIに反映します。  
+>app\product\views\product_create_view.py
 
-Cloud Functionにアクセスし、レスポンス情報から緯度経度と、建物名を取得します。  
-```
-   var center;
-   var data = new Array();
-   fetch(`https://us-central1-sinuous-branch-322702.cloudfunctions.net/function-2`)
-    .then(response => {
-        console.log(response.status);
-        response.json().then(userInfo => {
-            for (var i = 0; i < userInfo.length; i++) {
-                console.log(userInfo[i].Latitude);
-                center = {lat: Number(userInfo[i].Latitude), 
-                          lng: Number(userInfo[i].Longitude)};
-                data.push({
-                        position: new google.maps.LatLng(
-                            Number(userInfo[i].Latitude), 
-                            Number(userInfo[i].Longitude)),
-                        content: userInfo[i].BusinessName});
-                console.log(data);
+```python
+from app.product.forms.product_create_forms import ProductCreateForm
+from app.product.models.product import Product
+from django.urls import reverse_lazy
+from django.views.generic import CreateView
+
+
+class CreateProductView(CreateView):
+    model = Product
+    form_class = ProductCreateForm
+    template_name = 'product/product_create.html'
+    success_url = reverse_lazy('product:product_create')
 ```
 
-緯度経度にピン立てをします。  
-複数の住所情報がBigQueryから渡されることを考慮し、ループ処理でピン立てをします。  
-ピン立ての変数を宣言します。  
-```
-let marker: google.maps.Marker;
-```
-処理を追加します。  
-```
-                for (var i = 0; i < data.length; i++) {
-                  marker = new google.maps.Marker({
-                      position: data[i].position,
-                      map: map
-                });
+
+## urls.pyの修正
+
+app\product\urls.py に登録画面用のviewをインポートし、
+
+urlpatternsに登録画面へ遷移する為のURL文字列とインポートしたviewを設定します。
+>app\product\urls.py
+
+変更前
+
+```python
+from django.urls import path
+from app.product.views.product_update_view import ProductUpdateView
+
+    ・・・
+
+    path('create/', TemplateView.as_view(template_name='product/product_create.html'), name='product_create'),
 ```
 
-建物名を吹き出しに追加します。  
-吹き出しの変数を宣言します。  
-```
-let infoWindow: google.maps.InfoWindow;
-```
-処理を追加します。  
-```
-                infoWindow = new google.maps.InfoWindow({
-                      position: data[i].position,
-                      content: data[i].content,
-                  });
-                infoWindow.open(map);
+変更後
+
+```python
+from django.urls import path
+from app.product.views.product_create_view import CreateProductView
+# 以下importを追加
+from app.product.views.product_update_view import ProductUpdateView
+
+・・・
+    # 元の文と差し替え
+    path('create/', CreateProductView.as_view(), name='product_create'),
 ```
 
-プレビューボタンより、動作を確認します。  
-![](img/draw_flow_0.png)  
+- ポイント
 
-BigQueryに登録したスター情報を絞り込んで検索出来ています。  
-また、ピンや吹き出しも追加出来ています。  
-![](img/draw_flow_0.png)  
+  WEBサイトの多くは
+
+  - DBからの情報を絞り込んで検索結果を表示する
+  - 検索結果の内、単一の情報の詳細内容を表示する
+  - 画面に入力された内容を元にDBへ情報を登録・更新する
+  
+  という機能を持っています。
+  
+  上記のような定型的な処理について、同じようなコードを書かなくても済むようあらかじめDjangoに処理が定義されています。
+  
+  その処理のことを汎用ビューと呼び、関数で定義されていれば「関数ベース汎用ビュー」、クラスで定義されていれば「クラスベース汎用ビュー」と呼びます。
+
+  クラスベース汎用ビューの内、何点かピックアップして紹介します。
+  
+- DetailView
+
+    個別詳細ページ実装時に使用する汎用ビューとなります。
+    modelに定義されたテーブルより、URLに指定されたプライマリーキーを元に絞り込まれたレコードを1件取得します。
+    
+    ※今回配布させて頂いている資材のapp\product\views\product_detail_view.py がDetailViewを使用している画面となりますので、併せてご確認ください
+
+<実装例>
+
+> views.py
+
+```python
+    from django.views.generic import DetailView
+    from mymodel.model import MyModel
+
+
+    class MyDetailView(DetailView):
+        model = MyModel
+```
+
+> urls.py
+
+```python
+    urlpatterns = [
+        path('<int:pk>', MyDetailView.as_view()),
+    ]
+```
+  
+  - CreateView／UpdateView
+  
+    CreateViewは、新たにレコード追加するフォームを定義することが出来るビューとなります。
+
+    UpdateViewは、すでに存在するデータを更新するフォームを定義することが出来るビューとなります。
+
+    ```form_valid``` , ```form_invalid```というメソッドが定義されているので、エラーの有無によって独自の処理を実施することが可能です。
+
+    ※今回配布させて頂いている資材のapp\product\views\product_update_view.py がUpdateViewを使用している画面となりますので、併せてご確認ください
+
+
+<CreateViewの実装例>
+
+> views.py
+
+```python
+from django.views.generic import CreateView
+from mymodel.model import MyModel
+from forms import MyModelForm
+
+class MyCreateView(CreateView):
+    model = MyModel
+    form_class = MyModelForm
+
+    def form_valid(self, form):
+        ''' 入力内容チェックにエラーがない場合 '''
+        messages.success(self.request, "保存しました")
+        return super().form_valid(form)
+
+    def form_invalid(self, form):
+        ''' 入力内容チェックにエラーがある場合 '''
+        message.warning(self.request, "保存できませんでした")
+        return super().form_invalid(form)
+```
+
+> forms.py
+
+```python
+from django import forms
+from mymodel.model import MyModel
+
+
+class MyModelForm(forms.ModelForm):
+
+    class Meta:
+        model = MyModel
+        exclude = ['create_at', 'update_at', 'create_user', 'update_user',]
+```
+
+> urls.py
+
+```python
+urlpatterns = [
+    path('create/', MyCreateView.as_view()),
+]
+```
+
+
+## 画面確認
+以下URLをブラウザにて入力し画面を表示します。
+
+http://localhost:7777
+
+商品登録情報ボタンを押下してみてください。
+
+![](./img/Section4_1.png)
+
+登録画面が表示されレイアウトがイメージの通り変更されていれば成功です。このままデータの登録もしてみましょう。
+
+![](./img/Section4_2.png)
+
+無事登録出来たら、このまま管理画面（Django管理サイト）に移動して実際に登録されているかも併せて見てみましょう。
+
+このとき、usernameとpasswordを求められますが、これは先程createsuperuserで設定したusernameとpasswordでログインすることが出来ます。

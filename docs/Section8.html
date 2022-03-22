@@ -1,0 +1,472 @@
+
+<!DOCTYPE HTML>
+<html lang="ja" >
+    <head>
+        <meta charset="UTF-8">
+        <title>7. 自動化処理の実装 -incron- · mirameet</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="HonKit 3.7.1">
+        
+        
+        
+    
+    <link rel="stylesheet" href="gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-search-pro-fixed/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-anchors/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-navigator/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-collapsible-chapters/collapsible-chapters.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-hints/plugin-hints.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-insert-logo/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="Section9.html" />
+    
+    
+    <link rel="prev" href="Section7.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book honkit-cloak">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="検索ワードを入力" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    はじめに
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="Section2.html">
+            
+                <a href="Section2.html">
+            
+                    
+                    1. デモアプリクローン
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="Section3.html">
+            
+                <a href="Section3.html">
+            
+                    
+                    2. アプリケーションコード修正を行う前に
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="Section4.html">
+            
+                <a href="Section4.html">
+            
+                    
+                    3. アプリケーションコード修正（商品情報登録画面）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="Section5.html">
+            
+                <a href="Section5.html">
+            
+                    
+                    4. カスタムコマンド
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="Section6.html">
+            
+                <a href="Section6.html">
+            
+                    
+                    5. batchファイル修正 -問題-
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="Section7.html">
+            
+                <a href="Section7.html">
+            
+                    
+                    6. batchファイル修正 -回答-
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.8" data-path="Section8.html">
+            
+                <a href="Section8.html">
+            
+                    
+                    7. 自動化処理の実装 -incron-
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="Section9.html">
+            
+                <a href="Section9.html">
+            
+                    
+                    8. 構築環境の掃除
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://github.com/honkit/honkit" target="blank" class="gitbook-link">
+            HonKitで公開 
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="." >7. 自動化処理の実装 -incron-</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="自動化処理の実装_-incron-"><a name="自動化処理の実装--incron-" class="plugin-anchor" href="#自動化処理の実装--incron-"><i class="fa fa-link" aria-hidden="true"></i></a>自動化処理の実装 -incron-</h1>
+<p>当手順では以下の赤枠部分のバッチの自動化についてご説明致します。</p>
+<p><img src="img/31.png" alt></p>
+<h2 id="自動化にあたり">1. 自動化にあたり</h2>
+<p>バッチを自動で定期的に実行するために、ジョブ管理ツールや運用管理ソフトを導入したり、Linuxではcron、atなどのジョブスケジューラを検討するかと思います。</p>
+<p>今回のハンズオンでは、自動化されている様子をすぐに確認していただくために、「incron」を使用したいと思います。</p>
+<p>incron　については本ハンズオンから少し外れた領域のため、詳細の説明は割愛させていただきますが、興味のある方はぜひ一度調べてみて下さい。</p>
+<ul>
+<li>incronとは<blockquote>
+<p>&quot;inotify cron&quot;システム。デーモンとテーブルマニピュレーターから構成されており、cronと同じように使用する事が可能。大きな違いとして、cronは期間や日時などのイベントで処理するデーモンに対し、incronはファイルシステムのイベントで処理されます。</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="Incronの設定・起動">2. Incronの設定・起動</h2>
+<p>ここからはコンテナ内で作業する必要があります。以下のコマンドを実行して下さい。</p>
+<pre><code class="lang-sh">docker-compose <span class="hljs-built_in">exec</span> web bash
+</code></pre>
+<p>コンテナに入れたら、以下のmakeコマンドを実行して下さい。</p>
+<pre><code class="lang-sh">make incron-set
+</code></pre>
+<p>続けて、以下のコマンドを実行して下さい。</p>
+<pre><code class="lang-sh"><span class="hljs-built_in">cd</span> ./csv
+service incron start &amp;&amp; incrontab -d
+</code></pre>
+<p>ここまで実行することで、</p>
+<p><strong>&quot;/meetup/csv/フォルダに&quot;</strong>、<strong>&quot;ファイルが移動されてきたら&quot;</strong>、<strong>&quot;/meetup/sh/product.sh&quot;</strong> を実行し、<strong>&quot;/meetup/logs/batch.log&quot;</strong> というログファイルを出力する設定が完了しました。</p>
+<p>makefileに上記設定について記載していますので、makefileを覗いてみましょう。</p>
+<pre><code>incron-set:
+    echo &quot;root&quot; &gt; /etc/incron.allow
+    incrontab -l | { cat; echo &apos;/meetup/csv/ IN_MOVED_TO /bin/sh /meetup/sh/product.sh &gt;&amp; /meetup/logs/batch.log&apos;; } | incrontab -
+</code></pre><blockquote>
+<p>echo &quot;root&quot; &gt; /etc/incron.allow</p>
+</blockquote>
+<p>こちらでは、incron.allowに許可するユーザーを記載しています。
+（今回は&quot;root&quot;としていますが、実運用では適切なユーザーを設定して下さい。）</p>
+<blockquote>
+<p>incrontab -l | { cat; echo &apos;/meetup/csv/...</p>
+</blockquote>
+<p>こちらの内容では「incrontab」へ</p>
+<ul>
+<li>監視する対象（/meetup/csv/）</li>
+<li>監視するイベント(IN_MOVED_TO)</li>
+<li>実行する処理(/bin/sh /meetup/sh/product.sh &gt;&amp; /meetup/logs/batch.log)</li>
+</ul>
+<p>以上を入力しています。</p>
+<p>それでは、実際に自動でバッチファイルが実行され、DBに登録されるかをみていきたいと思います。</p>
+<h2 id="data_csvの修正">3. data.csvの修正</h2>
+<p>/meetup/csv/data.csvを以下のフォルダに一旦移動させます。</p>
+<pre><code class="lang-sh">mv /meetup/csv/data.csv /meetup/taihi/
+</code></pre>
+<p>次にdata.csvを修正します。</p>
+<p>先程のセクションでバッチを起動しているので、3つのデータが登録されています。</p>
+<p>このあとの自動処理後に、反映されたデータがすぐわかるよう、データ数が増えるように修正しましょう。</p>
+<ul>
+<li><p>修正前</p>
+<pre><code>code,name,explanation,price,create_user,update_user
+2,orange,mamde in japan,500,999,999
+3,computer,mac,5000,999,999
+</code></pre></li>
+<li><p>修正後</p>
+<pre><code>code,name,explanation,price,create_user,update_user
+4,pen,mamde in japan,100,999,999
+5,bicycle,mamde in germany,35000,999,999
+</code></pre></li>
+</ul>
+<p>それでは、準備が整いましたので、以下のコマンドを入力して下さい。</p>
+<pre><code class="lang-sh">mv /meetup/taihi/data.csv /meetup/csv/
+</code></pre>
+<p>移動できたらadmin画面からデータが登録されているか確認してみましょう！
+また、ログファイルにも内容が出力されているので、そちらも併せて確認しましょう！
+登録されていれば成功です！</p>
+<p><a href="http://localhost:7777/admin/product/product/" target="_blank">http://localhost:7777/admin/product/product/</a></p>
+<div id="anchors-navbar"><i class="fa fa-anchor"></i><ul><p><a href="#自動化処理の実装_-incron-">自動化処理の実装 -incron-</a></p><li><a href="#自動化にあたり">1. 自動化にあたり</a></li><li><a href="#Incronの設定・起動">2. Incronの設定・起動</a></li><li><a href="#data_csvの修正">3. data.csvの修正</a></li></ul></div><a href="#自動化にあたり" id="goTop"><i class="fa fa-arrow-up"></i></a>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="Section7.html" class="navigation navigation-prev " aria-label="Previous page: 6. batchファイル修正 -回答-">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="Section9.html" class="navigation navigation-next " aria-label="Next page: 8. 構築環境の掃除">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"7. 自動化処理の実装 -incron-","level":"1.8","depth":1,"next":{"title":"8. 構築環境の掃除","level":"1.9","depth":1,"path":"Section9.md","ref":"Section9.md","articles":[]},"previous":{"title":"6. batchファイル修正 -回答-","level":"1.7","depth":1,"path":"Section7.md","ref":"Section7.md","articles":[]},"dir":"ltr"},"config":{"plugins":["search-pro-fixed","-lunr","-search","hide-published-with","anchors","navigator","collapsible-chapters","hints","copy-code-button","custom-favicon","insert-logo"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"collapsible-chapters":{},"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"search-pro-fixed":{},"hide-published-with":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"favicon":"./img/miracleave.ico","navigator":{},"custom-favicon":{},"copy-code-button":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{},"insert-logo":{"url":"./img/miracleave.png","style":"background: none; width: 100%;"}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"mirameet","language":"ja","gitbook":"*"},"file":{"path":"Section8.md","mtime":"2022-03-22T07:14:35.583Z","type":"markdown"},"gitbook":{"version":"3.7.1","time":"2022-03-22T07:20:37.162Z"},"basePath":".","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <noscript>
+        <style>
+            .honkit-cloak {
+                display: block !important;
+            }
+        </style>
+    </noscript>
+    <script>
+        // Restore sidebar state as critical path for prevent layout shift
+        function __init__getSidebarState(defaultValue){
+            var baseKey = "";
+            var key = baseKey + ":sidebar";
+            try {
+                var value = localStorage[key];
+                if (value === undefined) {
+                    return defaultValue;
+                }
+                var parsed = JSON.parse(value);
+                return parsed == null ? defaultValue : parsed;
+            } catch (e) {
+                return defaultValue;
+            }
+        }
+        function __init__restoreLastSidebarState() {
+            var isMobile = window.matchMedia("(max-width: 600px)").matches;
+            if (isMobile) {
+                // Init last state if not mobile
+                return;
+            }
+            var sidebarState = __init__getSidebarState(true);
+            var book = document.querySelector(".book");
+            // Show sidebar if it enabled
+            if (sidebarState && book) {
+                book.classList.add("without-animation", "with-summary");
+            }
+        }
+
+        try {
+            __init__restoreLastSidebarState();
+        } finally {
+            var book = document.querySelector(".book");
+            book.classList.remove("honkit-cloak");
+        }
+    </script>
+    <script src="gitbook/gitbook.js"></script>
+    <script src="gitbook/theme.js"></script>
+    
+        
+        <script src="gitbook/gitbook-plugin-search-pro-fixed/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search-pro-fixed/search.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-hide-published-with/plugin.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-collapsible-chapters/collapsible-chapters.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-insert-logo/plugin.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

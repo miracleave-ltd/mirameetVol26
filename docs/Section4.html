@@ -3,7 +3,7 @@
 <html lang="ja" >
     <head>
         <meta charset="UTF-8">
-        <title>3. GoogleMapへ反映 · mirameet</title>
+        <title>3. アプリケーションコード修正（商品情報登録画面） · mirameet</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="HonKit 3.7.1">
@@ -121,25 +121,12 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2" data-path="Section1.html">
-            
-                <a href="Section1.html">
-            
-                    
-                    0. 事前準備内容の確認
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3" data-path="Section2.html">
+        <li class="chapter " data-level="1.2" data-path="Section2.html">
             
                 <a href="Section2.html">
             
                     
-                    1. テストデータの登録
+                    1. デモアプリクローン
             
                 </a>
             
@@ -147,12 +134,12 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4" data-path="Section3.html">
+        <li class="chapter " data-level="1.3" data-path="Section3.html">
             
                 <a href="Section3.html">
             
                     
-                    2. 検索プログラムの作成
+                    2. アプリケーションコード修正を行う前に
             
                 </a>
             
@@ -160,12 +147,12 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.5" data-path="Section4.html">
+        <li class="chapter active" data-level="1.4" data-path="Section4.html">
             
                 <a href="Section4.html">
             
                     
-                    3. GoogleMapへ反映
+                    3. アプリケーションコード修正（商品情報登録画面）
             
                 </a>
             
@@ -173,12 +160,64 @@
             
         </li>
     
-        <li class="chapter " data-level="1.6" data-path="Section5.html">
+        <li class="chapter " data-level="1.5" data-path="Section5.html">
             
                 <a href="Section5.html">
             
                     
-                    4. おまけ
+                    4. カスタムコマンド
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="Section6.html">
+            
+                <a href="Section6.html">
+            
+                    
+                    5. batchファイル修正 -問題-
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="Section7.html">
+            
+                <a href="Section7.html">
+            
+                    
+                    6. batchファイル修正 -回答-
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="Section8.html">
+            
+                <a href="Section8.html">
+            
+                    
+                    7. 自動化処理の実装 -incron-
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="Section9.html">
+            
+                <a href="Section9.html">
+            
+                    
+                    8. 構築環境の掃除
             
                 </a>
             
@@ -216,7 +255,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="." >3. GoogleMapへ反映</a>
+        <a href="." >3. アプリケーションコード修正（商品情報登録画面）</a>
     </h1>
 </div>
 
@@ -231,54 +270,158 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="GoogleMapへ反映"><a name="googlemapへ反映" class="plugin-anchor" href="#googlemapへ反映"><i class="fa fa-link" aria-hidden="true"></i></a>GoogleMapへ反映</h1>
-<p>この手順では、GoogleMapJavaSciriptAPIを使い、BigQueryの情報を絞り込んでピン止めするプログラムを<br>Web上で開発出来るCloud Shell Editerを使って開発していきます。<br>また、開発したプログラムはCloud Shell Editerで実行し、動作確認をしていきます。<br><img src="img/draw_flow_0.png" alt>  </p>
-<h2 id="ソースコードの取得">1. ソースコードの取得</h2>
-<p>Googleが提供しているSimpleMapのソースコードをベースに作成していきます。
-Googleドキュメントを開きます。<br><a href="https://developers.google.com/maps/documentation/javascript/examples/map-simple" target="_blank">https://developers.google.com/maps/documentation/javascript/examples/map-simple</a>  </p>
-<p>少しページをスクロールしたところにサンプルのソースコードがあります。<br>Google Cloud Shellを選択し、コードを取得します。<br><img src="img/draw_flow_0.png" alt>  </p>
-<p>Cloud Shell Editerが開き、ソースコードが配置されています。<br>フロントエンドの動作確認は全てCloud Shell Editer上から可能です。<br><img src="img/draw_flow_0.png" alt>  </p>
-<p>まずは、サンプルコードを実行してみましょ。<br>左欄からDebugを選び、再生ボタンをクリックします。<br><img src="img/draw_flow_0.png" alt>  </p>
-<p>右上にあるプレビューボタンからWebページの動作を確認します。
-<img src="img/draw_flow_0.png" alt>  </p>
-<h2 id="BigQueryとの連携">2. BigQueryとの連携</h2>
-<p>手順②で作成したCloud FunctionではBigQueryにアクセスし、検索結果をレスポンスで返却しているので、<br>Cloud FuctionのURLをTypeScriptから実行し、レスポンス情報を取得して、GoogleMapAPIに反映します。  </p>
-<p>Cloud Functionにアクセスし、レスポンス情報から緯度経度と、建物名を取得します。  </p>
-<pre><code>   var center;
-   var data = new Array();
-   fetch(`https://us-central1-sinuous-branch-322702.cloudfunctions.net/function-2`)
-    .then(response =&gt; {
-        console.log(response.status);
-        response.json().then(userInfo =&gt; {
-            for (var i = 0; i &lt; userInfo.length; i++) {
-                console.log(userInfo[i].Latitude);
-                center = {lat: Number(userInfo[i].Latitude), 
-                          lng: Number(userInfo[i].Longitude)};
-                data.push({
-                        position: new google.maps.LatLng(
-                            Number(userInfo[i].Latitude), 
-                            Number(userInfo[i].Longitude)),
-                        content: userInfo[i].BusinessName});
-                console.log(data);
-</code></pre><p>緯度経度にピン立てをします。<br>複数の住所情報がBigQueryから渡されることを考慮し、ループ処理でピン立てをします。<br>ピン立ての変数を宣言します。  </p>
-<pre><code>let marker: google.maps.Marker;
-</code></pre><p>処理を追加します。  </p>
-<pre><code>                for (var i = 0; i &lt; data.length; i++) {
-                  marker = new google.maps.Marker({
-                      position: data[i].position,
-                      map: map
-                });
-</code></pre><p>建物名を吹き出しに追加します。<br>吹き出しの変数を宣言します。  </p>
-<pre><code>let infoWindow: google.maps.InfoWindow;
-</code></pre><p>処理を追加します。  </p>
-<pre><code>                infoWindow = new google.maps.InfoWindow({
-                      position: data[i].position,
-                      content: data[i].content,
-                  });
-                infoWindow.open(map);
-</code></pre><p>プレビューボタンより、動作を確認します。<br><img src="img/draw_flow_0.png" alt>  </p>
-<p>BigQueryに登録したスター情報を絞り込んで検索出来ています。<br>また、ピンや吹き出しも追加出来ています。<br><img src="img/draw_flow_0.png" alt>  </p>
-<div id="anchors-navbar"><i class="fa fa-anchor"></i><ul><p><a href="#GoogleMapへ反映">GoogleMapへ反映</a></p><li><a href="#ソースコードの取得">1. ソースコードの取得</a></li><li><a href="#BigQueryとの連携">2. BigQueryとの連携</a></li></ul></div><a href="#ソースコードの取得" id="goTop"><i class="fa fa-arrow-up"></i></a>
+                                <h1 id="アプリケーションコード修正（商品情報登録画面）"><a name="アプリケーションコード修正（商品情報登録画面）" class="plugin-anchor" href="#アプリケーションコード修正（商品情報登録画面）"><i class="fa fa-link" aria-hidden="true"></i></a>アプリケーションコード修正（商品情報登録画面）</h1>
+<p>当手順では以下赤枠部分の商品登録画面のコードを修正していきます。</p>
+<p><img src="img/27.png" alt></p>
+<h2 id="当画面に関連するソースファイル">1. 当画面に関連するソースファイル</h2>
+<ul>
+<li>app\product\views\product_create_view.py <strong>←修正対象</strong></li>
+<li>app\product\urls.py <strong>←修正対象</strong></li>
+<li>templates\product\product_create.html</li>
+</ul>
+<p>修正する前に一度、状況を確認してみましょう。</p>
+<p><a href="http://localhost:7777" target="_blank">http://localhost:7777</a></p>
+<p>登録画面、機能が実装できていないことが確認できたかと思います。</p>
+<p>確認できたところで、あらためて修正をすすめていきましょう！</p>
+<h2 id="Viewの修正">2. Viewの修正</h2>
+<p>画面からボタンを押下した際に、画面に入力した値をDBへ登録する処理を実装します。</p>
+<blockquote>
+<p>app\product\views\product_create_view.py</p>
+</blockquote>
+<pre><code class="lang-python"><span class="hljs-keyword">from</span> app.product.forms.product_create_forms <span class="hljs-keyword">import</span> ProductCreateForm
+<span class="hljs-keyword">from</span> app.product.models.product <span class="hljs-keyword">import</span> Product
+<span class="hljs-keyword">from</span> django.urls <span class="hljs-keyword">import</span> reverse_lazy
+<span class="hljs-keyword">from</span> django.views.generic <span class="hljs-keyword">import</span> CreateView
+
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CreateProductView</span>(<span class="hljs-params">CreateView</span>):</span>
+    model = Product
+    form_class = ProductCreateForm
+    template_name = <span class="hljs-string">&apos;product/product_create.html&apos;</span>
+    success_url = reverse_lazy(<span class="hljs-string">&apos;product:product_create&apos;</span>)
+</code></pre>
+<h2 id="urls_pyの修正">3. urls.pyの修正</h2>
+<p>app\product\urls.py に登録画面用のviewをインポートし、</p>
+<p>urlpatternsに登録画面へ遷移する為のURL文字列とインポートしたviewを設定します。</p>
+<blockquote>
+<p>app\product\urls.py</p>
+</blockquote>
+<p>変更前</p>
+<pre><code class="lang-python"><span class="hljs-keyword">from</span> django.urls <span class="hljs-keyword">import</span> path
+<span class="hljs-keyword">from</span> app.product.views.product_update_view <span class="hljs-keyword">import</span> ProductUpdateView
+
+    ・・・
+
+    path(<span class="hljs-string">&apos;create/&apos;</span>, TemplateView.as_view(template_name=<span class="hljs-string">&apos;product/product_create.html&apos;</span>), name=<span class="hljs-string">&apos;product_create&apos;</span>),
+</code></pre>
+<p>変更後</p>
+<pre><code class="lang-python"><span class="hljs-keyword">from</span> django.urls <span class="hljs-keyword">import</span> path
+<span class="hljs-keyword">from</span> app.product.views.product_create_view <span class="hljs-keyword">import</span> CreateProductView
+<span class="hljs-comment"># 以下importを追加</span>
+<span class="hljs-keyword">from</span> app.product.views.product_update_view <span class="hljs-keyword">import</span> ProductUpdateView
+
+・・・
+    <span class="hljs-comment"># 元の文と差し替え</span>
+    path(<span class="hljs-string">&apos;create/&apos;</span>, CreateProductView.as_view(), name=<span class="hljs-string">&apos;product_create&apos;</span>),
+</code></pre>
+<ul>
+<li><p>ポイント</p>
+<p>WEBサイトの多くは</p>
+<ul>
+<li>DBからの情報を絞り込んで検索結果を表示する</li>
+<li>検索結果の内、単一の情報の詳細内容を表示する</li>
+<li>画面に入力された内容を元にDBへ情報を登録・更新する</li>
+</ul>
+<p>という機能を持っています。</p>
+<p>上記のような定型的な処理について、同じようなコードを書かなくても済むようあらかじめDjangoに処理が定義されています。</p>
+<p>その処理のことを汎用ビューと呼び、関数で定義されていれば「関数ベース汎用ビュー」、クラスで定義されていれば「クラスベース汎用ビュー」と呼びます。</p>
+<p>クラスベース汎用ビューの内、何点かピックアップして紹介します。</p>
+</li>
+<li><p>DetailView</p>
+<p>  個別詳細ページ実装時に使用する汎用ビューとなります。
+  modelに定義されたテーブルより、URLに指定されたプライマリーキーを元に絞り込まれたレコードを1件取得します。</p>
+<p>  ※今回配布させて頂いている資材のapp\product\views\product_detail_view.py がDetailViewを使用している画面となりますので、併せてご確認ください</p>
+</li>
+</ul>
+<p>&lt;実装例&gt;</p>
+<blockquote>
+<p>views.py</p>
+</blockquote>
+<pre><code class="lang-python">    <span class="hljs-keyword">from</span> django.views.generic <span class="hljs-keyword">import</span> DetailView
+    <span class="hljs-keyword">from</span> mymodel.model <span class="hljs-keyword">import</span> MyModel
+
+
+    <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyDetailView</span>(<span class="hljs-params">DetailView</span>):</span>
+        model = MyModel
+</code></pre>
+<blockquote>
+<p>urls.py</p>
+</blockquote>
+<pre><code class="lang-python">    urlpatterns = [
+        path(<span class="hljs-string">&apos;&lt;int:pk&gt;&apos;</span>, MyDetailView.as_view()),
+    ]
+</code></pre>
+<ul>
+<li><p>CreateView／UpdateView</p>
+<p>CreateViewは、新たにレコード追加するフォームを定義することが出来るビューとなります。</p>
+<p>UpdateViewは、すでに存在するデータを更新するフォームを定義することが出来るビューとなります。</p>
+<p><code>form_valid</code> , <code>form_invalid</code>というメソッドが定義されているので、エラーの有無によって独自の処理を実施することが可能です。</p>
+<p>※今回配布させて頂いている資材のapp\product\views\product_update_view.py がUpdateViewを使用している画面となりますので、併せてご確認ください</p>
+</li>
+</ul>
+<createviewの実装例>
+
+<blockquote>
+<p>views.py</p>
+</blockquote>
+<pre><code class="lang-python"><span class="hljs-keyword">from</span> django.views.generic <span class="hljs-keyword">import</span> CreateView
+<span class="hljs-keyword">from</span> mymodel.model <span class="hljs-keyword">import</span> MyModel
+<span class="hljs-keyword">from</span> forms <span class="hljs-keyword">import</span> MyModelForm
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyCreateView</span>(<span class="hljs-params">CreateView</span>):</span>
+    model = MyModel
+    form_class = MyModelForm
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">form_valid</span>(<span class="hljs-params">self, form</span>):</span>
+        <span class="hljs-string">&apos;&apos;&apos; 入力内容チェックにエラーがない場合 &apos;&apos;&apos;</span>
+        messages.success(self.request, <span class="hljs-string">&quot;保存しました&quot;</span>)
+        <span class="hljs-keyword">return</span> <span class="hljs-built_in">super</span>().form_valid(form)
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">form_invalid</span>(<span class="hljs-params">self, form</span>):</span>
+        <span class="hljs-string">&apos;&apos;&apos; 入力内容チェックにエラーがある場合 &apos;&apos;&apos;</span>
+        message.warning(self.request, <span class="hljs-string">&quot;保存できませんでした&quot;</span>)
+        <span class="hljs-keyword">return</span> <span class="hljs-built_in">super</span>().form_invalid(form)
+</code></pre>
+<blockquote>
+<p>forms.py</p>
+</blockquote>
+<pre><code class="lang-python"><span class="hljs-keyword">from</span> django <span class="hljs-keyword">import</span> forms
+<span class="hljs-keyword">from</span> mymodel.model <span class="hljs-keyword">import</span> MyModel
+
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyModelForm</span>(<span class="hljs-params">forms.ModelForm</span>):</span>
+
+    <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Meta</span>:</span>
+        model = MyModel
+        exclude = [<span class="hljs-string">&apos;create_at&apos;</span>, <span class="hljs-string">&apos;update_at&apos;</span>, <span class="hljs-string">&apos;create_user&apos;</span>, <span class="hljs-string">&apos;update_user&apos;</span>,]
+</code></pre>
+<blockquote>
+<p>urls.py</p>
+</blockquote>
+<pre><code class="lang-python">urlpatterns = [
+    path(<span class="hljs-string">&apos;create/&apos;</span>, MyCreateView.as_view()),
+]
+</code></pre>
+<h2 id="画面確認">4. 画面確認</h2>
+<p>以下URLをブラウザにて入力し画面を表示します。</p>
+<p><a href="http://localhost:7777" target="_blank">http://localhost:7777</a></p>
+<p>商品登録情報ボタンを押下してみてください。</p>
+<p><img src="img/Section4_1.png" alt></p>
+<p>登録画面が表示されレイアウトがイメージの通り変更されていれば成功です。このままデータの登録もしてみましょう。</p>
+<p><img src="img/Section4_2.png" alt></p>
+<p>無事登録出来たら、このまま管理画面（Django管理サイト）に移動して実際に登録されているかも併せて見てみましょう。</p>
+<p>このとき、usernameとpasswordを求められますが、これは先程createsuperuserで設定したusernameとpasswordでログインすることが出来ます。</p>
+</createviewの実装例><div id="anchors-navbar"><i class="fa fa-anchor"></i><ul><p><a href="#アプリケーションコード修正（商品情報登録画面）">アプリケーションコード修正（商品情報登録画面）</a></p><li><a href="#当画面に関連するソースファイル">1. 当画面に関連するソースファイル</a></li><li><a href="#Viewの修正">2. Viewの修正</a></li><li><a href="#urls_pyの修正">3. urls.pyの修正</a></li><li><a href="#画面確認">4. 画面確認</a></li></ul></div><a href="#当画面に関連するソースファイル" id="goTop"><i class="fa fa-arrow-up"></i></a>
                                 
                                 </section>
                             
@@ -305,12 +448,12 @@ Googleドキュメントを開きます。<br><a href="https://developers.google
 
             
                 
-                <a href="Section3.html" class="navigation navigation-prev " aria-label="Previous page: 2. 検索プログラムの作成">
+                <a href="Section3.html" class="navigation navigation-prev " aria-label="Previous page: 2. アプリケーションコード修正を行う前に">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="Section5.html" class="navigation navigation-next " aria-label="Next page: 4. おまけ">
+                <a href="Section5.html" class="navigation navigation-next " aria-label="Next page: 4. カスタムコマンド">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -321,7 +464,7 @@ Googleドキュメントを開きます。<br><a href="https://developers.google
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"3. GoogleMapへ反映","level":"1.5","depth":1,"next":{"title":"4. おまけ","level":"1.6","depth":1,"path":"Section5.md","ref":"Section5.md","articles":[]},"previous":{"title":"2. 検索プログラムの作成","level":"1.4","depth":1,"path":"Section3.md","ref":"Section3.md","articles":[]},"dir":"ltr"},"config":{"plugins":["search-pro-fixed","-lunr","-search","hide-published-with","anchors","navigator","collapsible-chapters","hints","copy-code-button","custom-favicon","insert-logo"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"collapsible-chapters":{},"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"search-pro-fixed":{},"hide-published-with":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"favicon":"./img/miracleave.ico","navigator":{},"custom-favicon":{},"copy-code-button":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{},"insert-logo":{"url":"./img/miracleave.png","style":"background: none; width: 100%;"}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"mirameet","language":"ja","gitbook":"*"},"file":{"path":"Section4.md","mtime":"2022-01-26T05:00:52.810Z","type":"markdown"},"gitbook":{"version":"3.7.1","time":"2022-01-31T00:37:50.252Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"3. アプリケーションコード修正（商品情報登録画面）","level":"1.4","depth":1,"next":{"title":"4. カスタムコマンド","level":"1.5","depth":1,"path":"Section5.md","ref":"Section5.md","articles":[]},"previous":{"title":"2. アプリケーションコード修正を行う前に","level":"1.3","depth":1,"path":"Section3.md","ref":"Section3.md","articles":[]},"dir":"ltr"},"config":{"plugins":["search-pro-fixed","-lunr","-search","hide-published-with","anchors","navigator","collapsible-chapters","hints","copy-code-button","custom-favicon","insert-logo"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"collapsible-chapters":{},"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"search-pro-fixed":{},"hide-published-with":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"favicon":"./img/miracleave.ico","navigator":{},"custom-favicon":{},"copy-code-button":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{},"insert-logo":{"url":"./img/miracleave.png","style":"background: none; width: 100%;"}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"mirameet","language":"ja","gitbook":"*"},"file":{"path":"Section4.md","mtime":"2022-03-22T07:14:35.540Z","type":"markdown"},"gitbook":{"version":"3.7.1","time":"2022-03-22T07:20:37.162Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>

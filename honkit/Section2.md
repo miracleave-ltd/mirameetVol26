@@ -1,61 +1,58 @@
-# テストデータの登録  
-GoogleMapのデータをBigQueryで絞り込みを行っていくにあたり、  
-まずは絞り込むためのテストデータをBigQueryに登録します。  
-テストデータは、緯度経度が記述されているJSON形式とします。  
-今回は、GoogleMapで『スター』を付けた住所をExportし、テストデータとして使用したいと思います。  
-![](img/draw_flow_0.png)  
+# デモアプリダウンロード
+当手順では以下の赤枠部分を実施します。
+
+![](./img/24.png)
+
+## Githubリポジトリ表示
+以下リンクよりデモアプリのあるGithubリポジトリにアクセスします。
+URL:https://github.com/miracleave-ltd/meet-up-26_django
 
 
-## テストデータの作成  
-GoogleMapを開きます。
-https://www.google.co.jp/maps  
-![](img/draw_flow_0.png)  
+![](./img/28.png)
 
-お気に入りの場所を選択し、『スター付き』を選択します。  
-![](img/draw_flow_0.png)  
-複数スターを付けていきます。  
-![](img/draw_flow_0.png)  
+## ソースコードダウンロード
+Codeボタンより、Zipファイルをダウンロードします。
 
-## テストデータのエクスポート  
-Googleデータエクスポートを開きます。  
-https://takeout.google.com/settings/takeout  
-「選択をすべて解除」選択し、「マップ（マイプレイス）」のみ選択します。  
-![](img/draw_flow_0.png)  
-「次のステップ」　＞　「エクスポート作成」をクリックします。  
-![](img/draw_flow_0.png)  
-「ダウンロード」をクリックします。  
-ダウンロードしたZIPファイルを解凍し、JSON形式でスターを付けた情報が存在することを確認します。  
-![](img/draw_flow_0.png)  
+![](./img/29.png)
 
-## テストデータのBigQueryへ登録する  
-BigQueryを開きます。  
-https://console.cloud.google.com/bigquery  
-Cloud Shellを開きます。  
-![](img/draw_flow_0.png)  
-テストデータの形式に合うテーブル定義を作成します。
+
+## ソースコード展開
+
+ダウンロードしたZipファイルを任意のフォルダに展開してください。
+
+※次の手順を進めるに当たり、展開されたフォルダをVSCodeで開くようお願いします。
+
+## サイトを立ち上げてみる
+
+デモアプリを修正していない状態で、一度サイトを起動してみましょう。
+
+### Dockerの起動
+
+コマンドをVSCodeのターミナル上から実施し、Dockerの起動を行います。
+
+以下イメージのように `Creating <Dockerコンテナ名> ... done ` と表示されると成功です。
+
 ```
-echo '[{"name": "type","type": "STRING","mode": "NULLABLE"},{"name": "features","type": "RECORD","mode": "REPEATED","fields": [{"name": "geometry","type": "RECORD","mode": "REPEATED","fields": [{"name": "coordinates","type": "NUMERIC","mode": "REPEATED","fields": []},{"name": "type","type": "STRING","mode": "NULLABLE"}]},{"name": "properties","type": "RECORD","mode": "REPEATED","fields": [{"name": "GoogleMapsURL","type": "STRING","mode": "NULLABLE"},{"name": "Location","type": "RECORD","mode": "REPEATED","fields": [{"name": "Address","type": "STRING","mode": "NULLABLE"},{"name": "BusinessName","type": "STRING","mode": "NULLABLE"},{"name": "GeoCoordinates","type": "RECORD","mode": "REPEATED","fields": [{"name": "Latitude","type": "STRING","mode": "NULLABLE"},{"name": "Longitude","type": "STRING","mode": "NULLABLE"}]}]},{"name": "Published","type": "STRING","mode": "NULLABLE"},{"name": "Title","type": "STRING","mode": "NULLABLE"},{"name": "Updated","type": "STRING","mode": "NULLABLE"}]},{"name": "type","type": "STRING","mode": "NULLABLE"}]}]' > ddl.json
+docker-compose up -d --build
 ```
 
-データセットを作成します。  
+![](./img/26.png)
+
+
+### スーパーユーザーの作成
+
+以下コマンドを実施し、管理サイトにて使用するユーザー情報を作成します。
+
 ```
-bq mk --dataset --location=asia-northeast1 TEST2
-bq mk --table TEST2.TEST2 ddl.json
-```
-テストデータをアップロードします。  
-![](img/draw_flow_0.png)  
-BigQueryにJSON形式を取り込み場合、JSON内の改行は除外する必要があるため、以下コマンドで置換します。  
-```
-sed -z 's/\n//g' 保存した場所.json | sed -z 's/Google Maps URL/GoogleMapsURL/g' | sed -z 's/Business Name/BusinessName/g' | sed -z 's/Geo Coordinates/GeoCoordinates/g' > test_data.json
+docker-compose run web python manage.py createsuperuser
 ```
 
-テストデータを登録します。  
-```
-bq load --source_format=NEWLINE_DELIMITED_JSON TEST2.TEST4 test_data.json
-```
+設定する値はそれぞれ以下の通りです。
+- ユーザー名：admin
+- メールアドレス：未設定（そのままEnter）
+- パスワード：任意の値（単純すぎるものは警告が出ます）
 
-SQLエディターから、テストデータが登録されているかを確認します。  
-```
-SELECT * FROM TEST2.TEST2
-```
 
+上記までの手順で、ブラウザに以下URLを入力することで画面を参照することが出来ます。
+
+http://localhost:7777

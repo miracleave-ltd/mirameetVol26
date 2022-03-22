@@ -3,7 +3,7 @@
 <html lang="ja" >
     <head>
         <meta charset="UTF-8">
-        <title>4. おまけ · mirameet</title>
+        <title>4. カスタムコマンド · mirameet</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="HonKit 3.7.1">
@@ -76,6 +76,8 @@
     <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
 
     
+    <link rel="next" href="Section6.html" />
+    
     
     <link rel="prev" href="Section4.html" />
     
@@ -119,25 +121,12 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2" data-path="Section1.html">
-            
-                <a href="Section1.html">
-            
-                    
-                    0. 事前準備内容の確認
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3" data-path="Section2.html">
+        <li class="chapter " data-level="1.2" data-path="Section2.html">
             
                 <a href="Section2.html">
             
                     
-                    1. テストデータの登録
+                    1. デモアプリクローン
             
                 </a>
             
@@ -145,12 +134,12 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4" data-path="Section3.html">
+        <li class="chapter " data-level="1.3" data-path="Section3.html">
             
                 <a href="Section3.html">
             
                     
-                    2. 検索プログラムの作成
+                    2. アプリケーションコード修正を行う前に
             
                 </a>
             
@@ -158,12 +147,12 @@
             
         </li>
     
-        <li class="chapter " data-level="1.5" data-path="Section4.html">
+        <li class="chapter " data-level="1.4" data-path="Section4.html">
             
                 <a href="Section4.html">
             
                     
-                    3. GoogleMapへ反映
+                    3. アプリケーションコード修正（商品情報登録画面）
             
                 </a>
             
@@ -171,12 +160,64 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.6" data-path="Section5.html">
+        <li class="chapter active" data-level="1.5" data-path="Section5.html">
             
                 <a href="Section5.html">
             
                     
-                    4. おまけ
+                    4. カスタムコマンド
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="Section6.html">
+            
+                <a href="Section6.html">
+            
+                    
+                    5. batchファイル修正 -問題-
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="Section7.html">
+            
+                <a href="Section7.html">
+            
+                    
+                    6. batchファイル修正 -回答-
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="Section8.html">
+            
+                <a href="Section8.html">
+            
+                    
+                    7. 自動化処理の実装 -incron-
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="Section9.html">
+            
+                <a href="Section9.html">
+            
+                    
+                    8. 構築環境の掃除
             
                 </a>
             
@@ -214,7 +255,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="." >4. おまけ</a>
+        <a href="." >4. カスタムコマンド</a>
     </h1>
 </div>
 
@@ -229,16 +270,75 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="おまけ"><a name="おまけ" class="plugin-anchor" href="#おまけ"><i class="fa fa-link" aria-hidden="true"></i></a>おまけ</h1>
-<p>最後に、APIの無効化や、作成したものを削除をします。  </p>
-<p>※無料期間が終了しても自動で課金されることはありません<br>　GCP内をCleanUpしたい方は以下手順を行ってください  </p>
-<h2 id="API無効化">1. API無効化</h2>
-<p><img src="img/draw_flow_0.png" alt>  </p>
-<h2 id="BigQueryの削除">2. BigQueryの削除</h2>
-<p><img src="img/draw_flow_0.png" alt>  </p>
-<h2 id="Cloud_Functionの削除">3. Cloud Functionの削除</h2>
-<p><img src="img/draw_flow_0.png" alt>  </p>
-<div id="anchors-navbar"><i class="fa fa-anchor"></i><ul><p><a href="#おまけ">おまけ</a></p><li><a href="#API無効化">1. API無効化</a></li><li><a href="#BigQueryの削除">2. BigQueryの削除</a></li><li><a href="#Cloud_Functionの削除">3. Cloud Functionの削除</a></li></ul></div><a href="#API無効化" id="goTop"><i class="fa fa-arrow-up"></i></a>
+                                <h1 id="カスタムコマンド（CustomCommands）"><a name="カスタムコマンド（customcommands）" class="plugin-anchor" href="#カスタムコマンド（customcommands）"><i class="fa fa-link" aria-hidden="true"></i></a>カスタムコマンド（CustomCommands）</h1>
+<p>当手順では以下の赤枠部分を実施します。カスタムコマンドについてご説明致します。</p>
+<p><img src="img/30.png" alt></p>
+<p>ここでは、カスタムコマンド（CustomCommands）の実装方法、オプションとして引数を与える場合の記述例などを一通りお話しさせていただいた後、
+次のセクションで、未実装となっている以下のバッチファイルのソースコードを修正しつつ、簡単な選択問題に答えていただいて実装していただければと思います。</p>
+<ul>
+<li>/meetup/app/batch/management/commands/product_data.py</li>
+<li>/meetup/app/batch/batches/product_import.py</li>
+</ul>
+<p>問題については回答も用意しておりますので、ぜひトライしてみましょう！</p>
+<h2 id="CustomCommandsの実装方法">1. CustomCommandsの実装方法</h2>
+<p>カスタムコマンドは標準でDjangoが持っている機能なので、特別なライブラリをインストールする必要などはありません。</p>
+<p>通常のアプリケーションを作成する手順通りコマンドを実行しますが、今回はすでにbatchアプリが作成されているため、そこに新たにbatchファイルを作成していきましょう。</p>
+<pre><code class="lang-sh">docker-compose <span class="hljs-built_in">exec</span> web touch ./app/batch/management/commands/product_test.py
+</code></pre>
+<p>product_test.pyに以下のように記載します</p>
+<blockquote>
+<p>/meetup/app/batch/management/commands/product_test.py</p>
+</blockquote>
+<pre><code class="lang-python"><span class="hljs-keyword">from</span> django.core.management.base <span class="hljs-keyword">import</span> BaseCommand
+
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Command</span>(<span class="hljs-params">BaseCommand</span>):</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">handle</span>(<span class="hljs-params">self, *args, **options</span>):</span>
+        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;batch test&quot;</span>)
+</code></pre>
+<p>これでバッチが動く状態となります。
+以下のコマンドを実施してみましょう。</p>
+<pre><code class="lang-sh">docker-compose <span class="hljs-built_in">exec</span> web python manage.py product_test
+</code></pre>
+<p>実行することで以下のように出力されます。</p>
+<pre><code>batch test
+</code></pre><p>では、実際にバッチを動かせたところで、カスタムコマンドを最低限実装するにあたり,
+気をつけるポイントが２つあります。</p>
+<p>ひとつは、BaseCommandをインポートし、実装するファイル内でBaseCommandを継承した、Commandクラスを定義すること。</p>
+<p>もう一つは、定義したクラス内で「handle」という関数を継承させることです。</p>
+<p>このhandler関数内に必要な処理を記載することで先程のようにカスタムコマンドを認識し、処理を実行できるようになります。</p>
+<p>また、例えば「コマンドへ引数を渡すようにしたい。」というような際は、以下のように</p>
+<p>「add_arguments」関数の記載を加えて、「handle」関数側で「options」からそれぞれの値を取り出すことで、コマンドへ引数を渡すことができます。</p>
+<blockquote>
+<p>/meetup/app/batch/management/commands/product_test.py</p>
+</blockquote>
+<pre><code class="lang-python"><span class="hljs-keyword">from</span> django.core.management.base <span class="hljs-keyword">import</span> BaseCommand
+
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Command</span>(<span class="hljs-params">BaseCommand</span>):</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">add_arguments</span>(<span class="hljs-params">self, parser</span>):</span>
+        parser.add_argument(<span class="hljs-string">&apos;-a&apos;</span>, <span class="hljs-string">&apos;--appname&apos;</span>, required=<span class="hljs-literal">True</span>, <span class="hljs-built_in">type</span>=<span class="hljs-built_in">str</span>)
+        parser.add_argument(<span class="hljs-string">&apos;-d&apos;</span>, <span class="hljs-string">&apos;--description&apos;</span>, required=<span class="hljs-literal">True</span>, <span class="hljs-built_in">type</span>=<span class="hljs-built_in">str</span>)        
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">handle</span>(<span class="hljs-params">self, *args, **options</span>):</span>
+        appname = options[<span class="hljs-string">&apos;appname&apos;</span>]
+        description = options[<span class="hljs-string">&apos;description&apos;</span>]
+        <span class="hljs-built_in">print</span>(<span class="hljs-string">f&apos;appname=<span class="hljs-subst">{appname}</span> , description=<span class="hljs-subst">{description}</span>&apos;</span>)
+</code></pre>
+<p>こちらの実装内容ですと、引数「appname」と「description」を必須指定としており、実行する際は以下のように入力する必要があります。</p>
+<pre><code class="lang-sh">docker-compose <span class="hljs-built_in">exec</span> web python manage.py product_test --appname batch --description producttest
+</code></pre>
+<p>実行することで以下のように出力されます。</p>
+<pre><code class="lang-sh">appname=batch, description=producttest
+</code></pre>
+<p>より詳しい内容を知りたい方は公式を参考にしていただければと思います。</p>
+<blockquote>
+<p><a href="https://docs.djangoproject.com/en/4.0/howto/custom-management-commands/" target="_blank">https://docs.djangoproject.com/en/4.0/howto/custom-management-commands/</a></p>
+</blockquote>
+<p>では、次からコード修正と問題の方に移っていきます。</p>
+<div id="anchors-navbar"><i class="fa fa-anchor"></i><ul><p><a href="#カスタムコマンド（CustomCommands）">カスタムコマンド（CustomCommands）</a></p><li><a href="#CustomCommandsの実装方法">1. CustomCommandsの実装方法</a></li></ul></div><a href="#CustomCommandsの実装方法" id="goTop"><i class="fa fa-arrow-up"></i></a>
                                 
                                 </section>
                             
@@ -265,10 +365,14 @@
 
             
                 
-                <a href="Section4.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: 3. GoogleMapへ反映">
+                <a href="Section4.html" class="navigation navigation-prev " aria-label="Previous page: 3. アプリケーションコード修正（商品情報登録画面）">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
+                
+                <a href="Section6.html" class="navigation navigation-next " aria-label="Next page: 5. batchファイル修正 -問題-">
+                    <i class="fa fa-angle-right"></i>
+                </a>
                 
             
         
@@ -277,7 +381,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"4. おまけ","level":"1.6","depth":1,"previous":{"title":"3. GoogleMapへ反映","level":"1.5","depth":1,"path":"Section4.md","ref":"Section4.md","articles":[]},"dir":"ltr"},"config":{"plugins":["search-pro-fixed","-lunr","-search","hide-published-with","anchors","navigator","collapsible-chapters","hints","copy-code-button","custom-favicon","insert-logo"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"collapsible-chapters":{},"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"search-pro-fixed":{},"hide-published-with":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"favicon":"./img/miracleave.ico","navigator":{},"custom-favicon":{},"copy-code-button":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{},"insert-logo":{"url":"./img/miracleave.png","style":"background: none; width: 100%;"}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"mirameet","language":"ja","gitbook":"*"},"file":{"path":"Section5.md","mtime":"2022-01-26T04:58:41.802Z","type":"markdown"},"gitbook":{"version":"3.7.1","time":"2022-01-31T00:37:50.252Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"4. カスタムコマンド","level":"1.5","depth":1,"next":{"title":"5. batchファイル修正 -問題-","level":"1.6","depth":1,"path":"Section6.md","ref":"Section6.md","articles":[]},"previous":{"title":"3. アプリケーションコード修正（商品情報登録画面）","level":"1.4","depth":1,"path":"Section4.md","ref":"Section4.md","articles":[]},"dir":"ltr"},"config":{"plugins":["search-pro-fixed","-lunr","-search","hide-published-with","anchors","navigator","collapsible-chapters","hints","copy-code-button","custom-favicon","insert-logo"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"collapsible-chapters":{},"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"search-pro-fixed":{},"hide-published-with":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"favicon":"./img/miracleave.ico","navigator":{},"custom-favicon":{},"copy-code-button":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{},"insert-logo":{"url":"./img/miracleave.png","style":"background: none; width: 100%;"}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"mirameet","language":"ja","gitbook":"*"},"file":{"path":"Section5.md","mtime":"2022-03-22T07:14:35.548Z","type":"markdown"},"gitbook":{"version":"3.7.1","time":"2022-03-22T07:20:37.162Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>

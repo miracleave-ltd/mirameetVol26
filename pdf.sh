@@ -1,1 +1,1 @@
-docker-compose run doc honkit pdf
+docker-compose run web honkit pdf

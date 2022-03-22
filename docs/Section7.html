@@ -1,0 +1,435 @@
+
+<!DOCTYPE HTML>
+<html lang="ja" >
+    <head>
+        <meta charset="UTF-8">
+        <title>6. batchファイル修正 -回答- · mirameet</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="HonKit 3.7.1">
+        
+        
+        
+    
+    <link rel="stylesheet" href="gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-search-pro-fixed/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-anchors/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-navigator/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-collapsible-chapters/collapsible-chapters.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-hints/plugin-hints.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-insert-logo/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="Section8.html" />
+    
+    
+    <link rel="prev" href="Section6.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book honkit-cloak">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="検索ワードを入力" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    はじめに
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="Section2.html">
+            
+                <a href="Section2.html">
+            
+                    
+                    1. デモアプリクローン
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="Section3.html">
+            
+                <a href="Section3.html">
+            
+                    
+                    2. アプリケーションコード修正を行う前に
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="Section4.html">
+            
+                <a href="Section4.html">
+            
+                    
+                    3. アプリケーションコード修正（商品情報登録画面）
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="Section5.html">
+            
+                <a href="Section5.html">
+            
+                    
+                    4. カスタムコマンド
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="Section6.html">
+            
+                <a href="Section6.html">
+            
+                    
+                    5. batchファイル修正 -問題-
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.7" data-path="Section7.html">
+            
+                <a href="Section7.html">
+            
+                    
+                    6. batchファイル修正 -回答-
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="Section8.html">
+            
+                <a href="Section8.html">
+            
+                    
+                    7. 自動化処理の実装 -incron-
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="Section9.html">
+            
+                <a href="Section9.html">
+            
+                    
+                    8. 構築環境の掃除
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://github.com/honkit/honkit" target="blank" class="gitbook-link">
+            HonKitで公開 
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="." >6. batchファイル修正 -回答-</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="batchファイル修正_-回答-"><a name="batchファイル修正--回答-" class="plugin-anchor" href="#batchファイル修正--回答-"><i class="fa fa-link" aria-hidden="true"></i></a>batchファイル修正 -回答-</h1>
+<p>こちらは先程の問題の回答になります。<br>
+以下のように修正するとバッチが起動して正常にデータを取り込めるようになります。</p>
+<p>修正できたら、以下のコマンドを実行します。</p>
+<pre><code class="lang-sh">docker-compose <span class="hljs-built_in">exec</span> web python manage.py product_data
+</code></pre>
+<p>修正箇所がすべて解消できていれば、現在以下の内容がターミナルに出力されていると思います。</p>
+<p>※日付、登録データの内容は割愛しています。</p>
+<pre><code class="lang-text">商品データ登録 - INFO - == batch処理開始 ==
+商品データ登録 - INFO - base_dir = /meetup/app/batch/bathes
+商品データ登録 - INFO - db_path = /meetup/app/batch/bathes/db.sqlite3
+商品データ登録 - INFO - === &gt; Start DB登録 ==
+商品データ登録 - DEBUG - add_data = {......}
+商品データ登録 - DEBUG - add_data = {......}
+商品データ登録 - INFO - === &gt; End DB登録 ==
+商品データ登録 - INFO - == batch処理終了 ==
+</code></pre>
+<h2 id="回答">1. 回答</h2>
+<h3 id="Question１">1.1. Question１</h3>
+<p>正.③</p>
+<blockquote>
+<p>django側で設定している、BASE_DIRはプロジェクトルートを指しています。
+そのため、os.path.joinメソッドでは、「プロジェクトルート」から対象ファイルまでのパスとして設定します。</p>
+<pre><code class="lang-python">FILE_NAME = os.path.join(BASE_DIR, <span class="hljs-string">&apos;csv&apos;</span>, <span class="hljs-string">&apos;data.csv&apos;</span>)
+</code></pre>
+</blockquote>
+<h3 id="Question2">1.2. Question2</h3>
+<p>正.①</p>
+<blockquote>
+<p>今回操作するモデルオブジェクトは「Product」のため、必要な記述は①です。
+カスタムコマンドにより、Djangoの機能を利用すること出来るため、
+従来のDjangoと遜色なくModelオブジェクトを操作することが出来ます。</p>
+<pre><code class="lang-python"><span class="hljs-keyword">from</span> app.product.models.product <span class="hljs-keyword">import</span> Product
+</code></pre>
+</blockquote>
+<div id="anchors-navbar"><i class="fa fa-anchor"></i><ul><p><a href="#batchファイル修正_-回答-">batchファイル修正 -回答-</a></p><li><a href="#回答">1. 回答</a></li><ul><li><a href="#Question１">1.1. Question１</a></li><li><a href="#Question2">1.2. Question2</a></li></ul></ul></div><a href="#回答" id="goTop"><i class="fa fa-arrow-up"></i></a>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="Section6.html" class="navigation navigation-prev " aria-label="Previous page: 5. batchファイル修正 -問題-">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="Section8.html" class="navigation navigation-next " aria-label="Next page: 7. 自動化処理の実装 -incron-">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"6. batchファイル修正 -回答-","level":"1.7","depth":1,"next":{"title":"7. 自動化処理の実装 -incron-","level":"1.8","depth":1,"path":"Section8.md","ref":"Section8.md","articles":[]},"previous":{"title":"5. batchファイル修正 -問題-","level":"1.6","depth":1,"path":"Section6.md","ref":"Section6.md","articles":[]},"dir":"ltr"},"config":{"plugins":["search-pro-fixed","-lunr","-search","hide-published-with","anchors","navigator","collapsible-chapters","hints","copy-code-button","custom-favicon","insert-logo"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"collapsible-chapters":{},"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"search-pro-fixed":{},"hide-published-with":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"favicon":"./img/miracleave.ico","navigator":{},"custom-favicon":{},"copy-code-button":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{},"insert-logo":{"url":"./img/miracleave.png","style":"background: none; width: 100%;"}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"mirameet","language":"ja","gitbook":"*"},"file":{"path":"Section7.md","mtime":"2022-03-22T07:14:35.573Z","type":"markdown"},"gitbook":{"version":"3.7.1","time":"2022-03-22T07:20:37.162Z"},"basePath":".","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <noscript>
+        <style>
+            .honkit-cloak {
+                display: block !important;
+            }
+        </style>
+    </noscript>
+    <script>
+        // Restore sidebar state as critical path for prevent layout shift
+        function __init__getSidebarState(defaultValue){
+            var baseKey = "";
+            var key = baseKey + ":sidebar";
+            try {
+                var value = localStorage[key];
+                if (value === undefined) {
+                    return defaultValue;
+                }
+                var parsed = JSON.parse(value);
+                return parsed == null ? defaultValue : parsed;
+            } catch (e) {
+                return defaultValue;
+            }
+        }
+        function __init__restoreLastSidebarState() {
+            var isMobile = window.matchMedia("(max-width: 600px)").matches;
+            if (isMobile) {
+                // Init last state if not mobile
+                return;
+            }
+            var sidebarState = __init__getSidebarState(true);
+            var book = document.querySelector(".book");
+            // Show sidebar if it enabled
+            if (sidebarState && book) {
+                book.classList.add("without-animation", "with-summary");
+            }
+        }
+
+        try {
+            __init__restoreLastSidebarState();
+        } finally {
+            var book = document.querySelector(".book");
+            book.classList.remove("honkit-cloak");
+        }
+    </script>
+    <script src="gitbook/gitbook.js"></script>
+    <script src="gitbook/theme.js"></script>
+    
+        
+        <script src="gitbook/gitbook-plugin-search-pro-fixed/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search-pro-fixed/search.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-hide-published-with/plugin.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-collapsible-chapters/collapsible-chapters.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-insert-logo/plugin.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

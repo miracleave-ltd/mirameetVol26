@@ -38,8 +38,8 @@ RUN npm i -g honkit \
 ENV LANG ja_JP.UTF-8
 
 # 07やさしさアンチック
-COPY 07YasashisaAntique/fonts.conf /root/.config/fontconfig/
-COPY 07YasashisaAntique/07YasashisaAntique.ttf /root/.local/share/fonts/
+# COPY 07YasashisaAntique/fonts.conf /root/.config/fontconfig/
+# COPY 07YasashisaAntique/07YasashisaAntique.ttf /root/.local/share/fonts/
 
 WORKDIR /srv/honkit
 VOLUME /srv/honkit

@@ -1,33 +1,24 @@
-# 【タイトル】  
-第26回目の開催となる【タイトル】です！  
-
----
-
-## 今回のやりたいこと
-GoogleMapではお気に入りの地図情報をリストとして保存することが出来ますが、リスト内の検索が出来ません・・・。  
-では、作ってしまおう!!ということで、
-今回は、お気に入りの地図情報をBigQueryに溜めて絞り込みを行い、GoogleMapに反映してみたいと思います！  
-BigQueryの絞り込みや、GoogleMapの反映はGoogleMapAPI・BigQueryAPIを使用します。  
-また、開発の実行環境はCloud Shell Editer、バックエンドのサーバーはClud Functionを使用します。  
+# Python×Djangoの実践スキルを学ぼう！～CSVデータの自動取込をやってみよう！～​
 
 ## 事前準備
-- Googleアカウント作成
-- GCPアカウントの作成
+- VSCodeインストール
+- Dockerインストール
+- Gitインストール、GitHubアカウントの作成
+
+
+## 今回の流れ（登録画面の実装 ～ バッチ処理の自動化）
+Djangoフレームワークを用いて、登録処理を行うことの出来る画面を作成。その後、バッチファイルを作成しcsvファイルデータを自動的にDBへ取り込むところまで実施します。
+  
 
 ## 手順
-![](img/draw_flow_0.png)  
-全体手順としては次の流れで進めます。  
- 0.事前準備内容の確認  
- 1.テストデータの登録  
- 2.検索プログラムの作成  
- 3.GoogleMapへ反映  
+全体手順としては以下の流れで進めます。
 
-## 技術要素
-参考サイトのリンクを記載しておきますので、参考にお使いください。  
-- [GoogleMapAPI](https://developers.google.com/maps/documentation/javascript/local-context/samples/neighborhood)
-- [BigQueryAPI](https://qiita.com/zaburo/items/344ed0caab369c2f94c5)
-- [JSON形式のBigQuery取り込み](https://cloud.google.com/bigquery/docs/loading-data-cloud-storage-json#bq)
+![](./img/23.png)
 
----
-
-今回の手順ではGoogleChromeのみ使用します。OS問わずハンズオン可能です。
+- デモアプリクローン
+- デモアプリの起動・動作確認
+- アプリケーションコード修正
+- バッチファイルコード修正
+- バッチファイルの動作確認
+- バッチ処理の自動化
+- 後片付け
