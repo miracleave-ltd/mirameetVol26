@@ -5,7 +5,7 @@
 
 ## Githubリポジトリ表示
 以下リンクよりデモアプリのあるGithubリポジトリにアクセスします。
-URL:https://github.com/miracleave-ltd/meet-up-26_django
+URL:https://github.com/miracleave-ltd/mirameetVol26
 
 
 ![](./img/28.png)
