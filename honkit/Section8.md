@@ -72,7 +72,8 @@ mv /meetup/csv/data.csv /meetup/taihi/
 
 先程のセクションでバッチを起動しているので、3つのデータが登録されています。
 
-このあとの自動処理後に、反映されたデータがすぐわかるよう、データ数が増えるように修正しましょう。
+このあとの自動処理後に、反映されたデータがすぐわかるよう、データ数が増えるように修正します。
+さらにすでに存在するレコードに対して更新処理も行うようなデータにしましょう。
 
 - 修正前
 ```
@@ -84,6 +85,7 @@ code,name,explanation,price,create_user,update_user
 - 修正後
 ```
 code,name,explanation,price,create_user,update_user
+1,rice,mamde in japan,3000,999,999
 4,pen,mamde in japan,100,999,999
 5,bicycle,mamde in germany,35000,999,999
 ```
@@ -99,3 +101,8 @@ mv /meetup/taihi/data.csv /meetup/csv/
 登録されていれば成功です！
 
 http://localhost:7777/admin/product/product/
+
+コンテナ上での作業も終了なので、以下のコマンドでコンテナから出ておきましょう。
+```sh
+exit
+```

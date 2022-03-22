@@ -60,9 +60,8 @@ from app.product.views.product_update_view import ProductUpdateView
 
 ```python
 from django.urls import path
-from app.product.views.product_create_view import CreateProductView
 # 以下importを追加
-from app.product.views.product_update_view import ProductUpdateView
+from app.product.views.product_create_view import CreateProductView
 
 ・・・
     # 元の文と差し替え

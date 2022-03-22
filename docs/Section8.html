@@ -322,7 +322,8 @@ service incron start &amp;&amp; incrontab -d
 </code></pre>
 <p>次にdata.csvを修正します。</p>
 <p>先程のセクションでバッチを起動しているので、3つのデータが登録されています。</p>
-<p>このあとの自動処理後に、反映されたデータがすぐわかるよう、データ数が増えるように修正しましょう。</p>
+<p>このあとの自動処理後に、反映されたデータがすぐわかるよう、データ数が増えるように修正します。
+さらにすでに存在するレコードに対して更新処理も行うようなデータにしましょう。</p>
 <ul>
 <li><p>修正前</p>
 <pre><code>code,name,explanation,price,create_user,update_user
@@ -331,6 +332,7 @@ service incron start &amp;&amp; incrontab -d
 </code></pre></li>
 <li><p>修正後</p>
 <pre><code>code,name,explanation,price,create_user,update_user
+1,rice,mamde in japan,3000,999,999
 4,pen,mamde in japan,100,999,999
 5,bicycle,mamde in germany,35000,999,999
 </code></pre></li>
@@ -342,6 +344,9 @@ service incron start &amp;&amp; incrontab -d
 また、ログファイルにも内容が出力されているので、そちらも併せて確認しましょう！
 登録されていれば成功です！</p>
 <p><a href="http://localhost:7777/admin/product/product/" target="_blank">http://localhost:7777/admin/product/product/</a></p>
+<p>コンテナ上での作業も終了なので、以下のコマンドでコンテナから出ておきましょう。</p>
+<pre><code class="lang-sh"><span class="hljs-built_in">exit</span>
+</code></pre>
 <div id="anchors-navbar"><i class="fa fa-anchor"></i><ul><p><a href="#自動化処理の実装_-incron-">自動化処理の実装 -incron-</a></p><li><a href="#自動化にあたり">1. 自動化にあたり</a></li><li><a href="#Incronの設定・起動">2. Incronの設定・起動</a></li><li><a href="#data_csvの修正">3. data.csvの修正</a></li></ul></div><a href="#自動化にあたり" id="goTop"><i class="fa fa-arrow-up"></i></a>
                                 
                                 </section>
@@ -385,7 +390,7 @@ service incron start &amp;&amp; incrontab -d
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"7. 自動化処理の実装 -incron-","level":"1.8","depth":1,"next":{"title":"8. 構築環境の掃除","level":"1.9","depth":1,"path":"Section9.md","ref":"Section9.md","articles":[]},"previous":{"title":"6. batchファイル修正 -回答-","level":"1.7","depth":1,"path":"Section7.md","ref":"Section7.md","articles":[]},"dir":"ltr"},"config":{"plugins":["search-pro-fixed","-lunr","-search","hide-published-with","anchors","navigator","collapsible-chapters","hints","copy-code-button","custom-favicon","insert-logo"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"collapsible-chapters":{},"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"search-pro-fixed":{},"hide-published-with":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"favicon":"./img/miracleave.ico","navigator":{},"custom-favicon":{},"copy-code-button":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{},"insert-logo":{"url":"./img/miracleave.png","style":"background: none; width: 100%;"}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"mirameet","language":"ja","gitbook":"*"},"file":{"path":"Section8.md","mtime":"2022-03-22T08:55:03.979Z","type":"markdown"},"gitbook":{"version":"3.7.1","time":"2022-03-22T08:58:20.136Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"7. 自動化処理の実装 -incron-","level":"1.8","depth":1,"next":{"title":"8. 構築環境の掃除","level":"1.9","depth":1,"path":"Section9.md","ref":"Section9.md","articles":[]},"previous":{"title":"6. batchファイル修正 -回答-","level":"1.7","depth":1,"path":"Section7.md","ref":"Section7.md","articles":[]},"dir":"ltr"},"config":{"plugins":["search-pro-fixed","-lunr","-search","hide-published-with","anchors","navigator","collapsible-chapters","hints","copy-code-button","custom-favicon","insert-logo"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"collapsible-chapters":{},"hints":{"info":"fa fa-info-circle","tip":"fa fa-mortar-board","danger":"fa fa-exclamation-circle","working":"fa fa-wrench"},"search-pro-fixed":{},"hide-published-with":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"favicon":"./img/miracleave.ico","navigator":{},"custom-favicon":{},"copy-code-button":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{},"insert-logo":{"url":"./img/miracleave.png","style":"background: none; width: 100%;"}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"mirameet","language":"ja","gitbook":"*"},"file":{"path":"Section8.md","mtime":"2022-03-22T11:38:28.247Z","type":"markdown"},"gitbook":{"version":"3.7.1","time":"2022-03-22T11:40:15.790Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>
